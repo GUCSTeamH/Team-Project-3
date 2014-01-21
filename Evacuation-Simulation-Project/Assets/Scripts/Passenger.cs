@@ -22,6 +22,6 @@ public class Passenger : Person {
 	}
 
 	public bool isBetweenSeats() {
-		return this.betweenSeats();
+		return this.betweenSeats;
 	}
 }
