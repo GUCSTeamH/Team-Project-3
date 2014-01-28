@@ -38,7 +38,7 @@ public abstract class Person : MonoBehaviour {
 	private Aggression aggression;
 	private Age age;
 	private Fitness fitness;
-	private int probaility;
+	private int probability;
 	private bool evacuated;
 	private Vector3 exitPoint;
 	private Vector3 startPosition;
@@ -49,16 +49,14 @@ public abstract class Person : MonoBehaviour {
 		this.startPosition = gameObject.transform.position;
 		this.evacuated = false;
 		calculateNearestExit();
-		setAggressionLevel();
-		setAge();
-		setFitnessLevel();
+		generatePersonality();
 	}
 	
 	// Update is called once per frame
 	void Update () {
 	
 	}
-
+	
 	public void baseStart() {
 		Start();
 	}
@@ -96,7 +94,17 @@ public abstract class Person : MonoBehaviour {
 		}
 	}
 
-	public void setAggressionLevel() {
+	public void resetPosition() {
+		gameObject.transform.position = this.startPosition;
+	}
+
+	public void generatePersonality(){
+		generateAge();
+		generateFitnessLevel();
+		generateAggressionLevel();
+	}
+
+	public void generateAggressionLevel() {
 		int aggr = Person.rand.Next(101);
 
 		if (aggr <= Person.timidProbability) {
@@ -109,14 +117,18 @@ public abstract class Person : MonoBehaviour {
 			this.aggression = Aggression.Aggressive;
 		}
 
-		this.probaility += (int)this.aggression;
+		this.probability += (int)this.aggression;
 	}
 
 	public Aggression getAggressionLevel() {
 		return this.aggression;
 	}
+
+	public void setAggressionLevel(Aggression aggression) {
+		this.aggression = aggression;
+	}
 	
-	public void setAge() {
+	public void generateAge() {
 		int age = Person.rand.Next(101);
 
 		if (age <= Person.youngProbability) {
@@ -129,14 +141,18 @@ public abstract class Person : MonoBehaviour {
 			this.age = Age.Old;
 		}
 
-		this.probaility += (int)this.age;
+		this.probability += (int)this.age;
 	}
 
 	public Age getAge() {
 		return this.age;
 	}
 
-	public void setFitnessLevel() {
+	public void setAge(Age age) {
+		this.age = age;
+	}
+
+	public void generateFitnessLevel() {
 		int fitness = Person.rand.Next(101);
 
 		if (fitness <= Person.unfitProbability) {
@@ -149,11 +165,23 @@ public abstract class Person : MonoBehaviour {
 			this.fitness = Fitness.Fit;
 		}
 
-		this.probaility += (int)this.fitness;
+		this.probability += (int)this.fitness;
 	}
 
 	public Fitness getFitnessLevel() {
 		return this.fitness;
+	}
+
+	public void setFitnessLevel(Fitness fitness) {
+		this.fitness = fitness;
+	}
+
+	public int getProbability() {
+		return this.probability;
+	}
+
+	public void setProbabilty(int probability) {
+		this.probability = probability;
 	}
 
 	public void setEvacuated(bool evacuated) {
