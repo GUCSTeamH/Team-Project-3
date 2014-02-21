@@ -143,7 +143,9 @@ function initialise_results_box(){
 		GUILayout.BeginArea (Rect (Screen.width - 110, 30, 100, 80));
 		GUILayout.BeginVertical();
 		GUILayout.BeginHorizontal();
-		GUILayout.Label("time: ");		
+		GUILayout.Label("time: ");
+		// Timer not working
+		// Just commented out for now		
 		//GUILayout.Label(timer.timer.ToString());
 		GUILayout.EndHorizontal();
 		GUILayout.BeginHorizontal();
@@ -211,7 +213,9 @@ function instantiate_passengers(){
 	
     // create an object for each level
 	var created_passengers = 0;
-	print(total_boarded + "total");
+	//print(total_boarded + "total");
+    
+    /* Redundant code - passengers already created
     while (created_passengers < total_boarded){
 		print(created_passengers + "created");
     	// choose a random seat
@@ -245,6 +249,8 @@ function instantiate_passengers(){
         }
 	}
 	
+	*/
+	
 	//instantiating the right behaviours to passengers
 	define_behaviour(aggressive_boarded, Color.red, "red");
 	define_behaviour(children_boarded, Color.yellow, "yellow");
@@ -262,7 +268,7 @@ function OnGUI(){
     // starting the animation
 	if(start == false){
     	if (GUI.Button(Rect(0,100,100,40),"Start")){
-			timer.start_timer();
+			//timer.start_timer();
 			instantiate_passengers();
 			start=true;
 			labels=true;
@@ -281,7 +287,7 @@ function OnGUI(){
 	
 	// restarting the animation
 	if (GUI.Button(Rect(0,250,100,40),"Restart")){
-		Application.LoadLevel("scene3");
+		Application.LoadLevel("A320Scene");
 	}
 }	
 
