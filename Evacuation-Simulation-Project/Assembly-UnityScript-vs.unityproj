@@ -47,6 +47,7 @@
      <Compile Include="Assets\Scripts\GUI Script.js" />
      <Compile Include="Assets\Scripts\Timer.js" />
      <None Include="Assets\RAIN\releasenotes.txt" />
+     <None Include="Assets\AI\Resources\BehaviorTrees\Behaviour.xml" />
      <None Include="Assets\iTween\ReadMe!\ReadMe!.txt" />
      <None Include="Assets\AI\Resources\BehaviorTrees\test.xml" />
      <None Include="Assets\RAIN\Editor\ScriptTemplates\BehaviorTreeTemplate.xml" />
