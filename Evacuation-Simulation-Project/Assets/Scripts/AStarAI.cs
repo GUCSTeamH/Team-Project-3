@@ -54,9 +54,9 @@ public class AStarAI : MonoBehaviour {
 			i++;
 		}
 		targetPosition=door.transform.position;
-		print ("test door");
-		print (name);
-		print ("test"+door.name);
+		//print ("test door");
+		//print (name);
+		//print ("test"+door.name);
 		
 	}
     
