@@ -623,7 +623,7 @@ public class AstarPath : MonoBehaviour {
 		if (logPathResults == PathLog.InGame) {
 			inGameDebugPath = debug;
 		} else {
-//			Debug.Log (debug);
+			Debug.Log (debug);
 		}
 	}
 	
@@ -2504,7 +2504,7 @@ AstarPath.RegisterSafeUpdate (delegate () {
 			
 			//Wait a bit if we have calculated a lot of paths
 			if (System.DateTime.UtcNow.Ticks > targetTick) {
-				yield return null;
+				yield return new WaitForSeconds(30);
 				targetTick = System.DateTime.UtcNow.Ticks + maxTicks;
 				numPaths = 0;
 			}

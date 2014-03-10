@@ -34,6 +34,7 @@ public class AStarAI : MonoBehaviour {
         seeker = GetComponent<Seeker>();
         controller = GetComponent<CharacterController>();
         
+		
         //Start a new path to the targetPosition, return the result to the OnPathComplete function
         seeker.StartPath (transform.position,targetPosition, OnPathComplete);
     }
@@ -70,16 +71,19 @@ public class AStarAI : MonoBehaviour {
     }
  
     public void FixedUpdate () {
-        if (path == null) {
+		
+		if (path == null) {
             //We have no path to move after yet
             return;
         }
         
         if (currentWaypoint >= path.vectorPath.Count) {
-            //Debug.Log ("End Of Path Reached");
+            Debug.Log ("End Of Path Reached");
+			Destroy(this.gameObject);
             return;
         }
         
+		
         //Direction to the next waypoint
         Vector3 dir = (path.vectorPath[currentWaypoint]-transform.position).normalized;
         dir *= speed * Time.fixedDeltaTime;
@@ -92,4 +96,5 @@ public class AStarAI : MonoBehaviour {
             return;
         }
     }
-} 
+		
+}
