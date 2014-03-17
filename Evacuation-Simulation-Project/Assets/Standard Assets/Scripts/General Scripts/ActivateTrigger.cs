@@ -1,4 +1,5 @@
 using UnityEngine;
+using RAIN.Core;
 
 public class ActivateTrigger : MonoBehaviour {
 	public enum Mode {
@@ -14,10 +15,12 @@ public class ActivateTrigger : MonoBehaviour {
 	public Mode action = Mode.Activate;
 
 	/// The game object to affect. If none, the trigger work on this game object
+	public string door;
 	public Object target;
 	public GameObject source;
 	public int triggerCount = 1;///
 	public bool repeatTrigger = false;
+
 	
 	void DoActivateTrigger () {
 		triggerCount--;
@@ -58,5 +61,7 @@ public class ActivateTrigger : MonoBehaviour {
 
 	void OnTriggerEnter (Collider other) {
 		DoActivateTrigger ();
+
+		//Destroy(gameObject);
 	}
 }
