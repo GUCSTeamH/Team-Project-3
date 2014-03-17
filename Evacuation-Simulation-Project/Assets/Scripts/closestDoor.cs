@@ -4,6 +4,7 @@ using RAIN.Core;
 using RAIN.Action;
 public class closestDoor : MonoBehaviour {
 	public Vector3 targetPosition;
+	public string att;
 	// Use this for initialization
 	void Start () {
 
