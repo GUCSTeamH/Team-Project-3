@@ -15,8 +15,10 @@ public class Attribute : MonoBehaviour {
 		if (ai!=null){
 			int random = monteCarlo(0, 100);
 			
-			if (random < 25){
+			if (random < 10){
 				ai.Agent.actionContext.SetContextItem<string>("type", "altruism");
+				/*ai.Agent.Avatar.renderer.material.color = Color.yellow; */
+				Debug.Log("Altruism");
 			}
 			else if (random < 50){
 				ai.Agent.actionContext.SetContextItem<string>("type", "behaviouralinaction");
@@ -26,6 +28,7 @@ public class Attribute : MonoBehaviour {
 			}
 			else{
 				ai.Agent.actionContext.SetContextItem<string>("type", "panic");
+				/* ai.Agent.Avatar.renderer.material.color = Color.red; */
 			}
 		}
 	}

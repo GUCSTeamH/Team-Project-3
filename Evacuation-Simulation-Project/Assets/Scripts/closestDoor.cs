@@ -22,10 +22,17 @@ public class closestDoor : MonoBehaviour {
 			}
 			i++;
 		}
+
 		RAINAgent ai=GetComponent<RAINAgent>();
 		if (ai!=null){
 			//print ("not null");
 			ai.Agent.actionContext.SetContextItem<string>("door", doorName);
+			string type = ai.Agent.actionContext.GetContextItem<string>("type");
+
+			if (type == "altruism"){
+				Debug.Log ("trigpass");
+				this.gameObject.AddComponent("trigPass");
+			}
 		}
 		else print ("null");
 		targetPosition=door.transform.position;
