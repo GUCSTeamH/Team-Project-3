@@ -7,6 +7,8 @@ var timer : Timer;
 
 var spacing = 2.0;
 
+var evacuated = 0;
+
 public var passengers= new Array();
 
 //new
@@ -150,7 +152,7 @@ function initialise_results_box(){
 		GUILayout.EndHorizontal();
 		GUILayout.BeginHorizontal();
 		GUILayout.Label("evacuated: ");		
-		GUILayout.Label("0");
+		GUILayout.Label(evacuated.ToString());   //counter
 		GUILayout.EndHorizontal();
 		GUILayout.EndVertical();		
 		GUILayout.EndArea();

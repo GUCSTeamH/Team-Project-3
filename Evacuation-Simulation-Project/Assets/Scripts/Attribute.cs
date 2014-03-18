@@ -4,6 +4,7 @@ using RAIN.Core;
 using RAIN.Action;
 
 public class Attribute : MonoBehaviour {
+	public string type;
 
 	public int monteCarlo(int min, int max){
 		return (Random.Range(min, max));
@@ -17,18 +18,24 @@ public class Attribute : MonoBehaviour {
 			
 			if (random < 10){
 				ai.Agent.actionContext.SetContextItem<string>("type", "altruism");
-				/*ai.Agent.Avatar.renderer.material.color = Color.yellow; */
+				type = "altruism";
+				this.gameObject.transform.Find("Sphere").renderer.material.color = Color.yellow;
 				Debug.Log("Altruism");
 			}
 			else if (random < 50){
+				type = "behai=viouralinaction";
 				ai.Agent.actionContext.SetContextItem<string>("type", "behaviouralinaction");
 			}
 			else if (random < 75){
+				type = "fearflight";
 				ai.Agent.actionContext.SetContextItem<string>("type", "fearflight");
+				//this.gameObject.transform.Find("Sphere").renderer.material.color = Color.red;
 			}
 			else{
+				type = "panic";
 				ai.Agent.actionContext.SetContextItem<string>("type", "panic");
-				/* ai.Agent.Avatar.renderer.material.color = Color.red; */
+				this.gameObject.transform.Find("Sphere").renderer.material.color = Color.red;
+				this.renderer.material.color = Color.red; 
 			}
 		}
 	}

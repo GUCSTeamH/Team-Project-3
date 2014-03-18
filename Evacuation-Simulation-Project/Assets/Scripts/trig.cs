@@ -3,9 +3,11 @@ using System.Collections;
 
 public class trig : MonoBehaviour {
 
-	void OnTriggerEnter (Collider other) {
-		
+	void OnTriggerStay (Collider other) {
 		Destroy (other.gameObject);
+		//StartCoroutine(Wait(other.gameObject));
+
 
 	}
+
 }
