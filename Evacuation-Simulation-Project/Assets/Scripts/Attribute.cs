@@ -59,26 +59,25 @@ public class Attribute : MonoBehaviour {
 		if (ai!=null){
 			int random = monteCarlo();
 			
-			if (random < 10){
+			if (random < 15){
 				ai.Agent.actionContext.SetContextItem<string>("type", "altruism");
 				type = "altruism";
 				this.gameObject.transform.Find("Sphere").renderer.material.color = Color.green;
 			}
-			else if (random < 35){
+			else if (random < 40){
 				type = "behaviouralinaction";
 				ai.Agent.actionContext.SetContextItem<string>("type", "behaviouralinaction");
 				this.gameObject.transform.Find("Sphere").renderer.material.color = Color.yellow;
 			}
-			else if (random < 75){
-				type = "fearflight";
-				ai.Agent.actionContext.SetContextItem<string>("type", "fearflight");
-				this.gameObject.transform.Find("Sphere").renderer.material.color = Color.gray;
-			}
-			else{
+			else if (random < 50){
 				type = "panic";
 				ai.Agent.actionContext.SetContextItem<string>("type", "panic");
 				this.gameObject.transform.Find("Sphere").renderer.material.color = Color.red;
-				this.renderer.material.color = Color.red; 
+			}
+			else{
+				type = "fearflight";
+				ai.Agent.actionContext.SetContextItem<string>("type", "fearflight");
+				this.gameObject.transform.Find("Sphere").renderer.material.color = Color.gray;
 			}
 		}
 	}
@@ -87,19 +86,13 @@ public class Attribute : MonoBehaviour {
 	IEnumerator Wait(RAINAgent ai){
 		float x= ai.maxSpeed;
 		float mass = this.gameObject.rigidbody.mass;
-		int time;
+		int time = 0;
 		Debug.Log("REACHED HERE");
 		if (type == "panic"){
 			time = Random.Range(0, 5);
 		}
 		else if (type == "fearflight"){
 			time = Random.Range(0, 10);
-		}
-		else if (type == "altruism"){
-			time = Random.Range(0, 15);
-		}
-		else{
-			time = Random.Range(0, 20);
 		}
 
 		if (ai!=null){
@@ -120,7 +113,10 @@ public class Attribute : MonoBehaviour {
 		setAge(ai);
 		setGender(ai);
 		setType(ai);
-		Wait(ai);
+
+		if (type == "panic" || type == "fearflight"){
+			StartCoroutine(Wait(ai));
+		}
 	}
 	
 	// Update is called once per frame

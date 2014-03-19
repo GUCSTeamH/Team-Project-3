@@ -41,15 +41,15 @@ public class trigPass : MonoBehaviour {
 	IEnumerator Wait(RAINAgent ai){
 		float x= ai.maxSpeed;
 		float mass = this.gameObject.rigidbody.mass;
-		int time = Random.Range(1, 5);
-		if (ai!=null){
+		int time = Random.Range(1, 10);
+		if (ai != null){
 			//print ("not null");
 			ai.maxSpeed = 0;
-			this.gameObject.rigidbody.mass=50;
+			this.gameObject.rigidbody.mass = 50;
 		}
 //		yield WaitForSeconds(30);
 		yield return new WaitForSeconds(time);
 		ai.maxSpeed = x;
-		this.gameObject.rigidbody.mass=mass;
+		this.gameObject.rigidbody.mass = mass;
 	}
 }
