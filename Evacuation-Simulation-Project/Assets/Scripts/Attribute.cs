@@ -153,8 +153,8 @@ public class Attribute : MonoBehaviour {
 
 	void setPanicPosition(RAINAgent ai){
 		Vector3 currPos = this.gameObject.transform.position;
-		float z = Random.Range(currPos.z - 20, currPos.z + 20);
-		Vector3 newPos = new Vector3((float)17, (float)7.9, z);
+		float z = Random.Range(currPos.z - 10, currPos.z + 10);
+		Vector3 newPos = new Vector3((float)17, (float)8, z);
 		ai.Agent.actionContext.SetContextItem<Vector3>("newpos", newPos);
 	}
 

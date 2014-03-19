@@ -18,7 +18,7 @@ public class closestDoor : MonoBehaviour {
 			if (distance < minDistance){
 				doorName=doors[i].name;
 				minDistance=distance;
-				door=doors[i];
+				targetPosition=doors[i].transform.position;
 			}
 			i++;
 		}
@@ -26,7 +26,8 @@ public class closestDoor : MonoBehaviour {
 		RAINAgent ai=GetComponent<RAINAgent>();
 		if (ai!=null){
 			//print ("not null");
-			ai.Agent.actionContext.SetContextItem<string>("door", doorName);
+			ai.Agent.actionContext.SetContextItem<Vector3>("door", targetPosition);
+			ai.Agent.actionContext.SetContextItem<string>("doorName", doorName);
 			string type = ai.Agent.actionContext.GetContextItem<string>("type");
 
 			if (type == "altruism"){
@@ -38,7 +39,6 @@ public class closestDoor : MonoBehaviour {
 			}
 		}
 		else print ("null");
-		targetPosition=door.transform.position;
 		//print(ai.Agent.actionContext.GetContextItem<string>("door"));
 		
 	}
