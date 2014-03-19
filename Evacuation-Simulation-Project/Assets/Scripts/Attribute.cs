@@ -6,7 +6,6 @@ using RAIN.Action;
 public class Attribute : MonoBehaviour {
 	private string type;
 	private bool overFifty, gender;
-	private int dominance, reasoning, boldness, tension, ruleConscious, selfReliance;
 
 	/* Returns random number in range 0-100 */
 	public int monteCarlo(){
@@ -50,36 +49,113 @@ public class Attribute : MonoBehaviour {
 		ai.Agent.actionContext.SetContextItem<bool>("gender", gender);
 	}
 
-	public void setAttributes(){
-	
-	}
-
 	/* Types - Altruism, Behavioural-Inaction, Panic, Fear-Flight */ 
 	public void setType(RAINAgent ai){
+
 		if (ai!=null){
 			int random = monteCarlo();
-			
-			if (random < 15){
-				ai.Agent.actionContext.SetContextItem<string>("type", "altruism");
-				type = "altruism";
-				this.gameObject.transform.Find("Sphere").renderer.material.color = Color.green;
-			}
-			else if (random < 40){
-				type = "behaviouralinaction";
-				ai.Agent.actionContext.SetContextItem<string>("type", "behaviouralinaction");
-				this.gameObject.transform.Find("Sphere").renderer.material.color = Color.yellow;
-			}
-			else if (random < 50){
-				type = "panic";
-				ai.Agent.actionContext.SetContextItem<string>("type", "panic");
-				this.gameObject.transform.Find("Sphere").renderer.material.color = Color.red;
+
+			if (gender){
+				if (overFifty){
+					if (random < 20){
+						ai.Agent.actionContext.SetContextItem<string>("type", "altruism");
+						type = "altruism";
+						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.green;
+					}
+					else if (random < 50){
+						type = "behaviouralinaction";
+						ai.Agent.actionContext.SetContextItem<string>("type", "behaviouralinaction");
+						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.yellow;
+					}
+					else if (random < 55){
+						type = "panic";
+						ai.Agent.actionContext.SetContextItem<string>("type", "panic");
+						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.red;
+					}
+					else{
+						type = "fearflight";
+						ai.Agent.actionContext.SetContextItem<string>("type", "fearflight");
+						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.gray;
+					}
+				}
+				else{
+					if (random < 15){
+						ai.Agent.actionContext.SetContextItem<string>("type", "altruism");
+						type = "altruism";
+						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.green;
+					}
+					else if (random < 40){
+						type = "behaviouralinaction";
+						ai.Agent.actionContext.SetContextItem<string>("type", "behaviouralinaction");
+						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.yellow;
+					}
+					else if (random < 50){
+						type = "panic";
+						ai.Agent.actionContext.SetContextItem<string>("type", "panic");
+						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.red;
+					}
+					else{
+						type = "fearflight";
+						ai.Agent.actionContext.SetContextItem<string>("type", "fearflight");
+						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.gray;
+					}
+				}
 			}
 			else{
-				type = "fearflight";
-				ai.Agent.actionContext.SetContextItem<string>("type", "fearflight");
-				this.gameObject.transform.Find("Sphere").renderer.material.color = Color.gray;
+				if (overFifty){
+					if (random < 15){
+						ai.Agent.actionContext.SetContextItem<string>("type", "altruism");
+						type = "altruism";
+						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.green;
+					}
+					else if (random < 40){
+						type = "behaviouralinaction";
+						ai.Agent.actionContext.SetContextItem<string>("type", "behaviouralinaction");
+						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.yellow;
+					}
+					else if (random < 50){
+						type = "panic";
+						ai.Agent.actionContext.SetContextItem<string>("type", "panic");
+						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.red;
+					}
+					else{
+						type = "fearflight";
+						ai.Agent.actionContext.SetContextItem<string>("type", "fearflight");
+						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.gray;
+					}
+				}
+				else{
+					if (random < 10){
+						ai.Agent.actionContext.SetContextItem<string>("type", "altruism");
+						type = "altruism";
+						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.green;
+					}
+					else if (random < 30){
+						type = "behaviouralinaction";
+						ai.Agent.actionContext.SetContextItem<string>("type", "behaviouralinaction");
+						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.yellow;
+					}
+					else if (random < 50){
+						type = "panic";
+						ai.Agent.actionContext.SetContextItem<string>("type", "panic");
+						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.red;
+					}
+					else{
+						type = "fearflight";
+						ai.Agent.actionContext.SetContextItem<string>("type", "fearflight");
+						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.gray;
+					}
+				}
 			}
 		}
+
+	}
+
+	void setPanicPosition(RAINAgent ai){
+		Vector3 currPos = this.gameObject.transform.position;
+		float z = Random.Range(currPos.z - 20, currPos.z + 20);
+		Vector3 newPos = new Vector3((float)17, (float)7.9, z);
+		ai.Agent.actionContext.SetContextItem<Vector3>("newpos", newPos);
 	}
 
 	/* Make them wait at the start before evacuation begins */
@@ -89,10 +165,10 @@ public class Attribute : MonoBehaviour {
 		int time = 0;
 		Debug.Log("REACHED HERE");
 		if (type == "panic"){
-			time = Random.Range(0, 5);
+			time = Random.Range(5, 10);
 		}
 		else if (type == "fearflight"){
-			time = Random.Range(0, 10);
+			time = Random.Range(10, 15);
 		}
 
 		if (ai!=null){
@@ -114,7 +190,12 @@ public class Attribute : MonoBehaviour {
 		setGender(ai);
 		setType(ai);
 
-		if (type == "panic" || type == "fearflight"){
+		if (type == "panic"){
+			StartCoroutine(Wait(ai));
+			setPanicPosition(ai);
+		}
+
+		if (type == "fearflight"){
 			StartCoroutine(Wait(ai));
 		}
 	}

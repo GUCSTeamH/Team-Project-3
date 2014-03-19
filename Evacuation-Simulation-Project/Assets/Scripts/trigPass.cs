@@ -10,7 +10,6 @@ public class trigPass : MonoBehaviour {
 	void OnTriggerEnter (Collider other) {
 		RAINAgent ai = GetComponent<RAINAgent>();
 		RAINAgent otherAI = other.gameObject.GetComponent<RAINAgent>();
-
 		if (other.gameObject.name=="Passenger" && otherAI != null && i < 1){
 			bool otherOverFifty = otherAI.Agent.actionContext.GetContextItem<bool>("overFifty");
 			bool otherGender = otherAI.Agent.actionContext.GetContextItem<bool>("gender");
@@ -41,7 +40,7 @@ public class trigPass : MonoBehaviour {
 	IEnumerator Wait(RAINAgent ai){
 		float x= ai.maxSpeed;
 		float mass = this.gameObject.rigidbody.mass;
-		int time = Random.Range(1, 10);
+		int time = Random.Range(5, 15);
 		if (ai != null){
 			//print ("not null");
 			ai.maxSpeed = 0;

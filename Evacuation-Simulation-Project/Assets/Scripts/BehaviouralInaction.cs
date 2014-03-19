@@ -16,11 +16,11 @@ public class BehaviouralInaction : MonoBehaviour {
 	IEnumerator Wait(RAINAgent ai){
 		float x = ai.maxSpeed;
 		float mass = this.gameObject.rigidbody.mass;
-		int time = Random.Range(0, 20);
+		int time = Random.Range(15, 25);
 		if (ai!=null){
 			//print ("not null");
 			ai.maxSpeed = 0;
-			this.gameObject.rigidbody.mass=30;
+			this.gameObject.rigidbody.mass = 30;
 		}
 		//		yield WaitForSeconds(30);
 		yield return new WaitForSeconds(time);
