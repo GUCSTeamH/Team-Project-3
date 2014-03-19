@@ -11,7 +11,7 @@ public class closestDoor : MonoBehaviour {
 		GameObject[] doors = GameObject.FindGameObjectsWithTag("Door");
 		float minDistance = Vector3.Distance(transform.position, doors[0].transform.position);
 		string doorName=doors[0].name;
-		GameObject door=doors[0];
+		targetPosition = doors[0].transform.position;
 		int i=1;
 		while (i<doors.Length){
 			float distance=Vector3.Distance(transform.position, doors[i].transform.position);

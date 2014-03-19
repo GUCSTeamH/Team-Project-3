@@ -18,12 +18,13 @@ public class somethingcs : RAIN.Action.Action
 	
 	public override RAIN.Action.Action.ActionResult Execute(RAIN.Core.Agent agent, float deltaTime)
 	{
+
 		Vector3 pos = agent.Avatar.transform.position;
 		//Debug.Log("*******************************************"+pos);
 		//RAIN.Path.PathManager path = agent.PathManager;
 		//path.moveTarget = no;
 		if (flag == false ){
-			Debug.Log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
+
 			no = agent.actionContext.GetContextItem<Vector3>("newpos");
 			flag =true;
 		}
@@ -32,6 +33,7 @@ public class somethingcs : RAIN.Action.Action
 		Debug.Log((int)no.y+"*******************************************"+(int)pos.y);
 		Debug.Log((int)no.z+"*******************************************"+(int)pos.z);
 		if (Mathf.Abs((int) no.x - (int) pos.x) <=1  && Mathf.Abs((int) no.z - ((int) pos.z))<=1) {
+			Debug.Log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 			no = agent.actionContext.GetContextItem<Vector3>("door");
 			agent.MoveTo(no, deltaTime);
 		}
