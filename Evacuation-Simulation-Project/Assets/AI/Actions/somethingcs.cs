@@ -29,11 +29,7 @@ public class somethingcs : RAIN.Action.Action
 			flag =true;
 		}
 		agent.MoveTo(no, deltaTime);
-		//Debug.Log((int)no.x+"*******************************************"+(int)pos.x);
-		Debug.Log((int)no.y+"*******************************************"+(int)pos.y);
-		Debug.Log((int)no.z+"*******************************************"+(int)pos.z);
 		if (Mathf.Abs((int) no.x - (int) pos.x) <=1  && Mathf.Abs((int) no.z - ((int) pos.z))<=1) {
-			Debug.Log("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
 			no = agent.actionContext.GetContextItem<Vector3>("door");
 			agent.MoveTo(no, deltaTime);
 		}

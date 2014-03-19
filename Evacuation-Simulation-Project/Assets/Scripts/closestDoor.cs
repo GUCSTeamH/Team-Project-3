@@ -42,6 +42,6 @@ public class closestDoor : MonoBehaviour {
 		//print(ai.Agent.actionContext.GetContextItem<string>("door"));
 		
 	}
-	
+
 
 }
