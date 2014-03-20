@@ -9,18 +9,29 @@ var passenger : GameObject;
 
 var spacing = 2.0;
 
+var style : GUIStyle;
 
 public var passengers= new Array();
 
 
-var total  = "100";
-var total_boarded : int;
+var total  = "178";
+var behaviour_boarded = 178;
+var age_boarded = 178;
 
-var aggressive = "10";
-var aggressive_boarded : int;
+var altruism = "Default";
+var altruism_boarded : int;
 
-var children="10";
-var children_boarded : int;
+var behaviouralinaction = "Default";
+var behaviouralinaction_boarded : int;
+
+var fearflight = "Default";
+var fearflight_boarded : int;
+
+var panic = "Default";
+var panic_boarded : int;
+
+var overfifty="Default";
+var overfifty_boarded : int;
 
 var women = "40";
 var women_boarded : int;
@@ -31,6 +42,10 @@ var labels=false;
 
 var isPaused=false;
 
+var panicCount : int = 0;
+var behaviouralInactionCount : int = 0;
+var fearFlightCount : int = 0;
+var altruismCount : int = 0;
 
 var seats : GameObject [];
 
@@ -51,68 +66,140 @@ function Start(){
 
 }
 
+function getAltruism(){
+	return altruism;
+}
 
+function getBehaviouralInaction(){
+	return behaviouralinaction;
+}
+
+function getFearFlight(){
+	return fearflight;
+}
+
+function getPanic(){
+	return panic;
+}
 
 function total_determinator(){
 		GUI.Label (Rect (30, 0, 100, 30), "total");
 		if(labels == false){
     		total = GUILayout.TextField (total, 25);
+    		Debug.Log ("total = " + total);
     		if(total != ""){
-    			total_boarded = parseInt(total);
-    			if (total_boarded > 178){ //user entered more than the capacity of the plane
+    			behaviour_boarded = parseInt(total);
+    			if (behaviour_boarded > 178){ //user entered more than the capacity of the plane
     				warning_exceeding_number();
     				//total_boarded = 178;
     			}
     		}
     		else                          //should prompt the user to enter something
-    			total_boarded = 100;        //should be changed - mock up for now
+    			behaviour_boarded = 178;        //should be changed - mock up for now
     		
     	}
     	else {
-    	     GUILayout.Label (total_boarded.ToString());
+    	     GUILayout.Label (behaviour_boarded.ToString());
     	}
 }
 
-
-function aggressive_determinator(){
-	GUI.Label (Rect (30, 25, 100, 30), "aggressive");
+function altruism_determinator(){
+	style.normal.textColor = Color.green;
+	GUI.Label (Rect (30, 25, 120, 30), "Altruism", style);
     if(labels == false) {
-    	aggressive = GUILayout.TextField (aggressive, 50);
-    	if(aggressive != ""){
-    		aggressive_boarded = parseInt(aggressive);
-    		if(aggressive_boarded > total_boarded)     //if user entered a greater value than the total passengers
-    		                                    //all the passengers are aggressive
+    	altruism = GUILayout.TextField (altruism, 50);
+    
+    	if(altruism != ""){
+    		altruism_boarded = parseInt(altruism);
+    		if(altruism_boarded > behaviour_boarded)     //if user entered a greater value than the total passengers
     			warning_exceeding_number();
-    		
     	}
     	else 
-    		aggressive_boarded = 0;     //change to ask the user to enter a value
+    		altruism_boarded = 0;     //change to ask the user to enter a value
+    		behaviour_boarded -= altruism_boarded;
     }
     else {
-    	GUILayout.Label (aggressive_boarded.ToString());	
+    	GUILayout.Label (altruism_boarded.ToString());	
     }
 }
 
-function children_determinator(){
-	GUI.Label (Rect (30, 50, 100, 30), "children");
+function behaviouralinaction_determinator(){
+	style.normal.textColor = Color.yellow;
+	GUI.Label (Rect (30, 50, 120, 30), "Behavioural Inaction", style);
+    if(labels == false) {
+    	behaviouralinaction = GUILayout.TextField (behaviouralinaction, 50);
+    	if(behaviouralinaction != ""){
+    		behaviouralinaction_boarded = parseInt(behaviouralinaction);
+    		if(behaviouralinaction_boarded > behaviour_boarded)     //if user entered a greater value than the total passengers
+    			warning_exceeding_number();
+    	}
+    	else 
+    		behaviouralinaction_boarded = 0;     //change to ask the user to enter a value
+    		behaviour_boarded -= behaviouralinaction_boarded;
+    }
+    else {
+    	GUILayout.Label (behaviouralinaction_boarded.ToString());	
+    }
+}
+
+function fearflight_determinator(){
+	style.normal.textColor = Color.black;
+	GUI.Label (Rect (30, 75, 120, 30), "Fear-Flight", style);
+    if(labels == false) {
+    	fearflight = GUILayout.TextField (fearflight, 50);
+    	if(fearflight != ""){
+    		fearflight_boarded = parseInt(fearflight);
+    		if(fearflight_boarded > behaviour_boarded)     //if user entered a greater value than the total passengers
+    			warning_exceeding_number();
+    	}
+    	else 
+    		fearflight_boarded = 0;     //change to ask the user to enter a value
+    		behaviour_boarded -= fearflight_boarded;
+    }
+    else {
+    	GUILayout.Label (fearflight_boarded.ToString());	
+    }
+}
+
+function panic_determinator(){
+	style.normal.textColor = Color.red;
+	GUI.Label (Rect (30, 100, 120, 30), "Panic", style);
+    if(labels == false) {
+    	panic = GUILayout.TextField (panic, 50);
+    	if(panic != ""){
+    		panic_boarded = parseInt(panic);
+    		if(panic_boarded > behaviour_boarded)     //if user entered a greater value than the total passengers
+    			warning_exceeding_number();
+    	}
+    	else 
+    		panic_boarded = 0;     //change to ask the user to enter a value
+    		behaviour_boarded -= panic_boarded;
+    }
+    else {
+    	GUILayout.Label (panic_boarded.ToString());	
+    }
+}
+
+/*function overfifty_determinator(){
+	GUI.Label (Rect (150, 25, 100, 30), "Over Fifty");
     	
     if(labels==false) {
-    	children = GUILayout.TextField (children, 75);
-    	if(children != ""){
+    	overfifty = GUILayout.TextField (overfifty, 75);
+    	if(overfifty != ""){
     	
-    		children_boarded = parseInt(children);
-    		if(children_boarded > total_boarded)     //if user entered a greater value than the total passengers
-    		                                    //all the passengers are aggressive
+    		overfifty_boarded = parseInt(overfifty);
+    		if(overfifty_boarded > age_boarded)     //if user entered a greater value than the total passenger
     			warning_exceeding_number();
     		
     	}
     	else 
-    		children_boarded = 0;
+    		overfifty_boarded = 0;
+    		age_boarded -= overfifty_boarded;
     }
     else {	
-    	GUILayout.Label (children_boarded.ToString());
+    	GUILayout.Label (overfifty_boarded.ToString());
     }
-}
+}*/
     	
 function women_determinator(){
 	    		
@@ -122,8 +209,7 @@ function women_determinator(){
     	if(women!=""){
     	
     		women_boarded=parseInt(women);
-    		if(women_boarded > total_boarded)     //if user entered a greater value than the total passengers
-    		                                           //all the passengers are aggressive
+    		if(women_boarded > behaviour_boarded)     //if user entered a greater value than the total passengers
     			warning_exceeding_number();
     		
     	}
@@ -160,9 +246,13 @@ function OnGUI()
 {
 	
 	total_determinator();
-	aggressive_determinator();
-	children_determinator();
-	women_determinator();
+	altruism_determinator();
+	behaviouralinaction_determinator();
+	fearflight_determinator();
+	panic_determinator();
+	/*overfifty_determinator();*/
+	/*children_determinator();*/
+	/*women_determinator();*/
 	initialise_results_box();
 	//determinator(120,34,56,75,"women",women,women_boarded);
 
@@ -171,9 +261,22 @@ function OnGUI()
 	if(start == false){
 		for (var passenger : GameObject in passengers_active){
 			passenger.active = false;
+			/*var type = passenger.actionContext.getContextItem("type");
+			if (type === "panic"){
+				panicCount++;
+			}
+			if (type === "altruism"){
+				altruismCount++;
+			}
+			if (type === "behaviouralinaction"){
+				behaviouralInactionCount++;
+			}
+			if (type === "panic"){
+				panicCount++;
+			}*/
 		}
 		
-    	if (GUI.Button(Rect(0,100,100,40),"Start")){
+    	if (GUI.Button(Rect(0,130,100,40),"Start")){
 			/*timer.start_timer();*/
 			//instantiate_passengers();
 			//initialise_results_box();
@@ -189,7 +292,7 @@ function OnGUI()
 	
 	
 	//quitting the animation
-	if (GUI.Button(Rect(0,200,100,40),"Main Menu")){
+	if (GUI.Button(Rect(0,230,100,40),"Main Menu")){
 	
 		Application.LoadLevel("Main Menu");
 		
@@ -197,14 +300,14 @@ function OnGUI()
 	
 	
 	//pausing the animation
-	if (GUI.Button(Rect(0,150,100,40),"Pause")){
+	if (GUI.Button(Rect(0,180,100,40),"Pause")){
 			
 		pause();;
 		
 	}	
 	
 	//restarting the animation
-	if (GUI.Button(Rect(0,250,100,40),"Restart")){
+	if (GUI.Button(Rect(0,280,100,40),"Restart")){
 		
 		Application.LoadLevel("A320Scene (No Behaviour)");
 	
@@ -304,8 +407,8 @@ function instantiate_passengers()
 	
     // create an Object for each level
 	var created_passengers = 0;
-	print(total_boarded+"total");
-    while ( created_passengers < total_boarded){
+	print(behaviour_boarded+"total");
+    while ( created_passengers < behaviour_boarded){
 		print(created_passengers + "created");
     	// choose a random seat
         random_seat = seats[Random.Range(0,178)].transform.position;
@@ -340,9 +443,9 @@ function instantiate_passengers()
 	}
 	
 	//instantiating the right behaviours to passengers
-	define_behaviour(aggressive_boarded,Color.red);
+	/*define_behaviour(aggressive_boarded,Color.red);
 	define_behaviour(children_boarded,Color.yellow);
-	define_behaviour(women_boarded,Color.magenta);
+	define_behaviour(women_boarded,Color.magenta);*/
 
 
 }
