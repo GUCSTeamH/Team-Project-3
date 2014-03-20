@@ -183,7 +183,7 @@ public class Attribute : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	void Start () {
+	void StartBeh () {
 		RAINAgent ai = GetComponent<RAINAgent>();
 
 		setAge(ai);

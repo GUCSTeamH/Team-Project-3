@@ -18,19 +18,19 @@ var total  = "178";
 var behaviour_boarded = 178;
 var age_boarded = 178;
 
-var altruism = "Default";
+var altruism = "0";
 var altruism_boarded : int;
 
-var behaviouralinaction = "Default";
+var behaviouralinaction = "0";
 var behaviouralinaction_boarded : int;
 
-var fearflight = "Default";
+var fearflight = "0";
 var fearflight_boarded : int;
 
-var panic = "Default";
+var panic = "0";
 var panic_boarded : int;
 
-var overfifty="Default";
+var overfifty="0";
 var overfifty_boarded : int;
 
 var women = "40";
@@ -286,6 +286,7 @@ function OnGUI()
 		for (var passenger : GameObject in passengers_active)
 		{
 		passenger.active = true;
+		passenger.GetComponent("Attribute").StartBeh();
 	}
 		}
 	}

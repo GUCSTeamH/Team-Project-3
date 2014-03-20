@@ -8,8 +8,7 @@
 	var scrollPosition : Vector2 = Vector2.zero;
 
 	// The string to display inside the scrollview. 2 buttons below add & clear this string.
-	var longString = "This is a computer program that conducts airplane evacuation simulations cheaply and safely while still providing the ability to gather data for a particular airplane model. In addition, it allows the user to vary different conditions and passenger behaviours  in order to examine their effects on the evacuation.What needs to be kept in mind is that for the time being computer modelling is not an allowable method for testing the evacuation capability of airplanes recognised by the Federal Aviation Administration (FAA) and traditional methods will still be used to determine it.";
-
+	var longString = "This is a computer program that conducts airplane evacuation simulations cheaply and safely while still providing the ability to gather data for a particular airplane model. In addition, it allows the user to vary different conditions and passenger behaviours  in order to examine their effects on the evacuation.";
 	function OnGUI () {	
 	
 		GUI.skin.label.font = font;
