@@ -166,15 +166,20 @@ public class Attribute : MonoBehaviour {
 		Debug.Log("REACHED HERE");
 		if (type == "panic"){
 			time = Random.Range(5, 10);
+			this.gameObject.rigidbody.mass = 30;
 		}
 		else if (type == "fearflight"){
 			time = Random.Range(10, 15);
+			this.gameObject.rigidbody.mass = 20;
+		}
+		else if (type == "behaviouralinaction"){
+			time = Random.Range(15, 25);
+			this.gameObject.rigidbody.mass = 50;
 		}
 
 		if (ai!=null){
 			//print ("not null");
 			ai.maxSpeed = 0;
-			this.gameObject.rigidbody.mass=50;
 		}
 		//		yield WaitForSeconds(30);
 		yield return new WaitForSeconds(time);
@@ -194,9 +199,11 @@ public class Attribute : MonoBehaviour {
 			StartCoroutine(Wait(ai));
 			setPanicPosition(ai);
 		}
-
-		if (type == "fearflight"){
+		else if (type == "fearflight" || type == "behaviouralinaction"){
 			StartCoroutine(Wait(ai));
+		}
+		else if(type == "altruism"){
+			this.gameObject.AddComponent("trigPass");
 		}
 	}
 	
