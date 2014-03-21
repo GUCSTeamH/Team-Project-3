@@ -1,3 +1,7 @@
+import System.IO;
+import System.Text;
+import System;
+
 var plane_capacity = 178; 
 
 
@@ -60,6 +64,40 @@ var occupied_seats = new Array(); // array that contains used  up positions
 
 var passengers_active : GameObject [];
 
+var guiSkin : GUISkin;
+
+var startButtonText = "Start";
+
+
+var front_left_count = 0;
+var front_left = "Front left door";
+
+var front_right_count = 0;
+var front_right = "Front left door";
+
+var first_middle_left_count = 0;
+var first_middle_left = "First middle left door";
+
+var second_middle_left_count = 0;
+var second_middle_left = "Second middle left door";
+
+var first_middle_right_count = 0;
+var first_middle_right = "First middle right door";
+
+var second_middle_right_count = 0;
+var second_middle_right = "Second middle right door";
+
+var rear_left_count = 0;
+var rear_left = "Rear left door";
+
+var rear_right_count = 0;
+var rear_right = "Rear right door";
+
+function log_results(){
+        var results : String = behaviour_boarded+","+altruism+","+timer.timer.ToString();
+        File.AppendAllText(Application.dataPath +"/results.txt",results+ Environment.NewLine);
+}
+
 //var font : Font;
 
 function Start(){
@@ -92,7 +130,7 @@ function total_determinator(){
     		if(total != ""){
     			behaviour_boarded = parseInt(total);
     			if (behaviour_boarded > 178){ //user entered more than the capacity of the plane
-    				warning_exceeding_number();
+    				warning_exceeding_number("total");
     				//total_boarded = 178;
     			}
     		}
@@ -107,79 +145,87 @@ function total_determinator(){
 
 function altruism_determinator(){
 	style.normal.textColor = Color.green;
-	GUI.Label (Rect (30, 25, 120, 30), "Altruism", style);
+	GUILayout.BeginHorizontal(); 
     if(labels == false) {
-    	altruism = GUILayout.TextField (altruism, 50);
+    	altruism = GUILayout.TextField (altruism, GUILayout.Width(50));
     
     	if(altruism != ""){
     		altruism_boarded = parseInt(altruism);
     		if(altruism_boarded > behaviour_boarded)     //if user entered a greater value than the total passengers
-    			warning_exceeding_number();
+    			warning_exceeding_number("total");
     	}
     	else 
     		altruism_boarded = 0;     //change to ask the user to enter a value
     		behaviour_boarded -= altruism_boarded;
     }
     else {
-    	GUILayout.Label (altruism_boarded.ToString());	
+    	GUILayout.Label (altruism_boarded.ToString(),GUILayout.Width(50));	
     }
+    GUILayout.Label ("altruism",style);
+    GUILayout.EndHorizontal();
 }
 
 function behaviouralinaction_determinator(){
 	style.normal.textColor = Color.yellow;
-	GUI.Label (Rect (30, 50, 120, 30), "Behavioural Inaction", style);
+	GUILayout.BeginHorizontal(); 
     if(labels == false) {
-    	behaviouralinaction = GUILayout.TextField (behaviouralinaction, 50);
+    	behaviouralinaction = GUILayout.TextField (behaviouralinaction, GUILayout.Width(50));
     	if(behaviouralinaction != ""){
     		behaviouralinaction_boarded = parseInt(behaviouralinaction);
     		if(behaviouralinaction_boarded > behaviour_boarded)     //if user entered a greater value than the total passengers
-    			warning_exceeding_number();
+    			warning_exceeding_number("total");
     	}
     	else 
     		behaviouralinaction_boarded = 0;     //change to ask the user to enter a value
     		behaviour_boarded -= behaviouralinaction_boarded;
     }
     else {
-    	GUILayout.Label (behaviouralinaction_boarded.ToString());	
+    	GUILayout.Label (behaviouralinaction_boarded.ToString(),GUILayout.Width(50));	
     }
+    GUILayout.Label ("behaviour inactive",style);
+    GUILayout.EndHorizontal(); 
 }
 
 function fearflight_determinator(){
 	style.normal.textColor = Color.black;
-	GUI.Label (Rect (30, 75, 120, 30), "Fear-Flight", style);
+	GUILayout.BeginHorizontal();  
     if(labels == false) {
-    	fearflight = GUILayout.TextField (fearflight, 50);
+    	fearflight = GUILayout.TextField (fearflight, GUILayout.Width(50));
     	if(fearflight != ""){
     		fearflight_boarded = parseInt(fearflight);
     		if(fearflight_boarded > behaviour_boarded)     //if user entered a greater value than the total passengers
-    			warning_exceeding_number();
+    			warning_exceeding_number("total");
     	}
     	else 
     		fearflight_boarded = 0;     //change to ask the user to enter a value
     		behaviour_boarded -= fearflight_boarded;
     }
     else {
-    	GUILayout.Label (fearflight_boarded.ToString());	
-    }
+    	GUILayout.Label (fearflight_boarded.ToString(),GUILayout.Width(50));
+    }   
+        GUILayout.Label ("fearflight",style);
+        GUILayout.EndHorizontal();  
 }
 
 function panic_determinator(){
 	style.normal.textColor = Color.red;
-	GUI.Label (Rect (30, 100, 120, 30), "Panic", style);
+	GUILayout.BeginHorizontal();
     if(labels == false) {
-    	panic = GUILayout.TextField (panic, 50);
+    	panic = GUILayout.TextField (panic, GUILayout.Width(50));
     	if(panic != ""){
     		panic_boarded = parseInt(panic);
     		if(panic_boarded > behaviour_boarded)     //if user entered a greater value than the total passengers
-    			warning_exceeding_number();
+    			warning_exceeding_number("total");
     	}
     	else 
     		panic_boarded = 0;     //change to ask the user to enter a value
     		behaviour_boarded -= panic_boarded;
     }
     else {
-    	GUILayout.Label (panic_boarded.ToString());	
-    }
+    	 GUILayout.Label (panic_boarded.ToString(),GUILayout.Width(50));
+    }   
+        GUILayout.Label ("panic",style);
+        GUILayout.EndHorizontal();
 }
 
 /*function overfifty_determinator(){
@@ -205,22 +251,24 @@ function panic_determinator(){
     	
 function women_determinator(){
 	    		
-    GUI.Label (Rect (30, 75, 100, 30), "women");
+    GUILayout.BeginHorizontal();
     if (labels==false) {	
-    	women = GUILayout.TextField (women, 100);
+    	women = GUILayout.TextField (women, GUILayout.Width(50));
     	if(women!=""){
     	
     		women_boarded=parseInt(women);
     		if(women_boarded > behaviour_boarded)     //if user entered a greater value than the total passengers
-    			warning_exceeding_number();
+    			warning_exceeding_number("total");
     		
     	}
     	else 
     		women_boarded=0;
     }
     else {
-    	GUILayout.Label (women_boarded.ToString());
-    }	
+    	GUILayout.Label (women_boarded.ToString(),GUILayout.Width(50));
+    }   
+        GUILayout.Label ("women",style);
+        GUILayout.EndHorizontal();
     
 }
 // label factory - doesn't work
@@ -246,6 +294,12 @@ function determinator(x : int, y : int, width : int, height : int, label : Strin
 
 function OnGUI()
 {
+	GUI.skin = guiSkin;
+
+    GUILayout.BeginArea (Rect (0,0,Screen.width, Screen.height));
+    GUILayout.BeginHorizontal();
+        
+    GUILayout.BeginVertical();
 	
 	total_determinator();
 	altruism_determinator();
@@ -255,7 +309,8 @@ function OnGUI()
 	/*overfifty_determinator();*/
 	/*children_determinator();*/
 	/*women_determinator();*/
-	initialise_results_box();
+	
+	GUILayout.EndVertical();
 	//determinator(120,34,56,75,"women",women,women_boarded);
 
     
@@ -277,8 +332,10 @@ function OnGUI()
 				panicCount++;
 			}*/
 		}
+		}
 		
-    	if (GUI.Button(Rect(0,130,100,40),"Start")){
+    	var startButton = GUILayout.Button(startButtonText,GUILayout.Height(50),GUILayout.Width(100));
+        if (startButton && start == false){
 			timer.start_timer();
 			//instantiate_passengers();
 			//initialise_results_box();
@@ -288,6 +345,7 @@ function OnGUI()
 			if (altruism_boarded == 0 && panic_boarded == 0 && behaviouralinaction_boarded == 0 && fearflight_boarded == 0 ) {
 				for (var passenger : GameObject in passengers_active) {
 					passenger.active = true;
+					passenger.GetComponent("closestDoor").calculateDoor();
 					passenger.GetComponent("Attribute").StartBeh();
 				}
 			} else {
@@ -299,24 +357,28 @@ function OnGUI()
 				for (var passenger : GameObject in passengers_active) {
 					if (altr_count < altruism_boarded) {
 						passenger.active = true;
+						passenger.GetComponent("closestDoor").calculateDoor();
 						passenger.GetComponent("Attribute").SetTypeManual("altruism");
 						passenger.GetComponent("Attribute").StartBehManual();
 						altr_count++;
 						continue;
 					} else if (panic_count < panic_boarded) {
 						passenger.active = true;	
+						passenger.GetComponent("closestDoor").calculateDoor();
 						passenger.GetComponent("Attribute").SetTypeManual("panic");
 						passenger.GetComponent("Attribute").StartBehManual();
 						panic_count++;
 						continue;
 					} else if (behav_count < behaviouralinaction_boarded) {
 						passenger.active = true;	
+						passenger.GetComponent("closestDoor").calculateDoor();
 						passenger.GetComponent("Attribute").SetTypeManual("behaviouralinaction");
 						passenger.GetComponent("Attribute").StartBehManual();
 						behav_count++;
 						continue;
 					} else if (fear_count < fearflight_boarded) {
 						passenger.active = true;
+						passenger.GetComponent("closestDoor").calculateDoor();
 						passenger.GetComponent("Attribute").SetTypeManual("fearflight");
 						passenger.GetComponent("Attribute").StartBehManual();
 						fear_count++;
@@ -325,34 +387,30 @@ function OnGUI()
 				}
 				
 			}
+			startButtonText="Restart";
 		}
-	}
-	
-	
+		else if (startButton && start == true){
+                Application.LoadLevel("A320Scene (No Behaviour)");
+        }
+		
 	//quitting the animation
-	if (GUI.Button(Rect(0,230,100,40),"Main Menu")){
-	
-		Application.LoadLevel("Main Menu");
-		
-	}
-	
-	
-	//pausing the animation
-	if (GUI.Button(Rect(0,180,100,40),"Pause")){
-			
-		pause();;
-		
-	}	
-	
-	//restarting the animation
-	if (GUI.Button(Rect(0,280,100,40),"Restart")){
-		
-		Application.LoadLevel("A320Scene (No Behaviour)");
-	
-	}
-				
+        if (GUILayout.Button("Main Menu",GUILayout.Height(50),GUILayout.Width(100))){
+                Application.LoadLevel("Main Menu");
+                
+        }
+        
+          //pausing the animation
+        if (GUILayout.Button("Pause",GUILayout.Height(50),GUILayout.Width(100))){
+                pause();
+                
+                
+        }  
+        
+        initialise_results_box();
+		GUILayout.EndHorizontal();
+        GUILayout.EndArea();  		
     	
-}	
+	}	
 
 public function updateEvac(){
 	evacuated++;
@@ -360,34 +418,80 @@ public function updateEvac(){
 
 function initialise_results_box(){
 
-		GUI.Box (Rect (Screen.width - 110, 10, 100, 100), "Results");	
-		GUILayout.BeginArea (Rect (Screen.width - 110, 30, 100, 80));
-		GUILayout.BeginVertical();
-		GUILayout.BeginHorizontal();
-		GUILayout.Label("time: ");		
-		GUILayout.Label(timer.timer.ToString());
-		GUILayout.EndHorizontal();
-		GUILayout.BeginHorizontal();
-		GUILayout.Label("evacuated: ");		
-		GUILayout.Label(evacuated.ToString());
-		GUILayout.EndHorizontal();
-		GUILayout.EndVertical();		
-		GUILayout.EndArea();
-		
+                GUILayout.BeginArea (Rect (Screen.width - 300, 10, 300, Screen.height-100));
+                GUILayout.BeginVertical();
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("time: ",GUILayout.Width(100));         
+                GUILayout.Label(timer.timer.ToString(),GUILayout.Width(50));
+                GUILayout.EndHorizontal();
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("evacuated: ",GUILayout.Width(100));            
+                GUILayout.Label("0",GUILayout.Width(50));
+                GUILayout.EndHorizontal();
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Front left: ",GUILayout.Width(100));           
+                GUILayout.Label(front_left_count.ToString(),GUILayout.Width(50));
+                GUILayout.Label("Front right: ",GUILayout.Width(100));          
+                GUILayout.Label(front_right_count.ToString(),GUILayout.Width(50));
+                GUILayout.EndHorizontal();
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Middle left 1: ",GUILayout.Width(100));                
+                GUILayout.Label(first_middle_left_count.ToString(),GUILayout.Width(50));
+                GUILayout.Label("Middle right 1: ",GUILayout.Width(100));               
+                GUILayout.Label(first_middle_right_count.ToString(),GUILayout.Width(50));
+                GUILayout.EndHorizontal();
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Middle left 2: ",GUILayout.Width(100));                
+                GUILayout.Label(second_middle_left_count.ToString(),GUILayout.Width(50));
+                GUILayout.Label("Middle right 2: ",GUILayout.Width(100));               
+                GUILayout.Label(second_middle_right_count.ToString(),GUILayout.Width(50));
+                GUILayout.EndHorizontal();
+                GUILayout.BeginHorizontal();
+                GUILayout.Label("Rear left: ",GUILayout.Width(100));            
+                GUILayout.Label(rear_left_count.ToString(),GUILayout.Width(50));
+                GUILayout.Label("Rear right: ",GUILayout.Width(100));           
+                GUILayout.Label(rear_right_count.ToString(),GUILayout.Width(50));
+                GUILayout.EndHorizontal();
+                if (GUILayout.Button("Log results",GUILayout.Width(100),GUILayout.Height(50))){
+                        log_results();  
+                }       
+
+                
+                GUILayout.EndArea();               
 }
 
 
-function warning_exceeding_number(){
 
-	GUI.Box (Rect (Screen.width/2 - 50, Screen.height/2-50, 120, 130),"Warning!");	    	// Make a group on the center of the screen
-	GUILayout.BeginArea (Rect (Screen.width/2 - 50, Screen.height/2-30, 100, 100));
-	GUILayout.BeginVertical();
+function warning_exceeding_number(variable:String){
 
-	GUILayout.Label("You entered too large number. Please enter a smaller one!");
-	
-	// End the group we started above. This is very important to remember!
-	GUILayout.EndVertical();
-	GUILayout.EndArea();
+        GUI.Box (Rect (Screen.width/2 - 50, Screen.height/2-50, 120, 160),"Warning!");          // Make a group on the center of the screen
+        GUILayout.BeginArea (Rect (Screen.width/2 - 50, Screen.height/2-30, 100, 160));
+        GUILayout.BeginVertical();
+
+        GUILayout.Label("You entered too large number for "+variable+" passengers. Please enter a smaller one!");
+        
+        // End the group we started above. This is very important to remember!
+        GUILayout.EndVertical();
+        GUILayout.EndArea();
+}
+
+
+function evacuation_done(){
+        Time.timeScale = 0;
+
+        GUI.Box (Rect (Screen.width/2 - 50, Screen.height/2-50, 120, 160),"Finish!");           // Make a group on the center of the screen
+        GUILayout.BeginArea (Rect (Screen.width/2 - 50, Screen.height/2-30, 120, 140));
+        GUILayout.BeginVertical();
+
+        GUILayout.Label("This is the end of this simulation. A total of "+behaviour_boarded+" evacuated for "+timer.timer.ToString()+" seconds.");
+        if(GUILayout.Button("OK")){
+                log_results();
+                Application.LoadLevel("Main Menu");
+
+        }
+        // End the group we started above. This is very important to remember!
+        GUILayout.EndVertical();
+        GUILayout.EndArea();
 }
 
 
@@ -414,7 +518,7 @@ function define_behaviour(passenger_type_boarded : int, color : Color) {
 	for (numLeft = passengers.length; numLeft > 0; numLeft--) {
 		if (passenger_type_boarded == 0)
 				break;
-		var random=Random.Range(0,passengers.length);
+		var random=UnityEngine.Random.Range(0,passengers.length);
 		if(passengers[random].renderer.material.color==Color.white){
 			passengers[random].renderer.material.color=color;
 			passenger_type_boarded--;
@@ -424,71 +528,36 @@ function define_behaviour(passenger_type_boarded : int, color : Color) {
 	
 }
 
-
-
-
-function instantiate_aisle()
-{
-	
-	for (y=minY;y<=maxY;y++)
-	{
-		a=Vector3(3 * spacing,0,y);
-		b=Vector3(4 * spacing,0,y);
-		occupied_seats.Add(a);
-		occupied_seats.Add(b);
-	
-	
-	}
-} 
-
-
-function instantiate_passengers()
-{
-	//initialise the aisle: people can't be seated in the aisle
-	instantiate_aisle();
-	
-    // create an Object for each level
-	var created_passengers = 0;
-	print(behaviour_boarded+"total");
-    while ( created_passengers < behaviour_boarded){
-		print(created_passengers + "created");
-    	// choose a random seat
-        random_seat = seats[Random.Range(0,178)].transform.position;
-        print(random_seat+"seat");
-        var free = true;
-            
-        //check if the chosen seat is occupied
-        for ( checkposition in occupied_seats){
-          	if ( checkposition == random_seat) {
-           		free = false;
-
-            }
-
-        }
-            
-        if (free == true){
-           	//allocate the passenger to the particular seat
-            passenger = Instantiate(passenger,random_seat, transform.rotation);
-                
-            //you can alter the positions of the passengers if these don't suit by changing the values at the end
-            passenger.transform.position.y = passenger.transform.position.y+0.3;
-            passenger.transform.position.x = passenger.transform.position.x+0.2;
-        	passenger.transform.position.z = passenger.transform.position.z+0.1;
-				
-			//when we add the behaviour it will be given the respective behaviour rather than a color
-        	passenger.renderer.material.color = Color.white;
-           	passengers.Push(passenger);
-            occupied_seats.Add(random_seat);
-            created_passengers++;
-
-        }
-	}
-	
-	//instantiating the right behaviours to passengers
-	/*define_behaviour(aggressive_boarded,Color.red);
-	define_behaviour(children_boarded,Color.yellow);
-	define_behaviour(women_boarded,Color.magenta);*/
-
-
+public function updateEvacFL(){
+	front_left_count++;
 }
+
+public function updateEvacFR(){
+	front_right_count++;
+}
+
+public function updateEvacBR(){
+	rear_right_count++;
+}
+
+public function updateEvacBL(){
+	rear_left_count++;
+}
+
+public function updateEvacML1(){
+	first_middle_left_count++;
+}
+
+public function updateEvacML2(){
+	second_middle_left_count++;
+}
+
+public function updateEvacMR1(){
+	first_middle_right_count++;
+}
+
+public function updateEvacMR2(){
+	second_middle_right_count++;
+}
+
 

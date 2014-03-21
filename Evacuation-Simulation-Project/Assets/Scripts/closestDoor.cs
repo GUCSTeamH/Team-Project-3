@@ -1,14 +1,18 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using System.Collections;
 using RAIN.Core;
 using RAIN.Action;
+using System.Collections.Generic;
 public class closestDoor : MonoBehaviour {
 	public Vector3 targetPosition;
 	public string att;
-	// Use this for initialization
-	void Start () {
-
-		GameObject[] doors = GameObject.FindGameObjectsWithTag("Door");
+	public GameObject[] doors;
+	
+	public void calculateDoor(){
+		
+		Debug.Log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+		doors = GameObject.FindGameObjectsWithTag("Door");
 		float minDistance = Vector3.Distance(transform.position, doors[0].transform.position);
 		string doorName=doors[0].name;
 		targetPosition = doors[0].transform.position;
@@ -22,14 +26,14 @@ public class closestDoor : MonoBehaviour {
 			}
 			i++;
 		}
-
+		
 		RAINAgent ai=GetComponent<RAINAgent>();
 		if (ai!=null){
 			//print ("not null");
 			ai.Agent.actionContext.SetContextItem<Vector3>("door", targetPosition);
 			ai.Agent.actionContext.SetContextItem<string>("doorName", doorName);
 			string type = ai.Agent.actionContext.GetContextItem<string>("type");
-
+			
 			if (type == "altruism"){
 				Debug.Log ("trigpass");
 				this.gameObject.AddComponent("trigPass");
@@ -42,6 +46,4 @@ public class closestDoor : MonoBehaviour {
 		//print(ai.Agent.actionContext.GetContextItem<string>("door"));
 		
 	}
-
-
 }
