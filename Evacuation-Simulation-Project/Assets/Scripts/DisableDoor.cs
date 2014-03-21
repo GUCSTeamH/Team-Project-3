@@ -11,7 +11,9 @@ public class DisableDoor : MonoBehaviour {
 			if (this.renderer.material.color == Color.red)
 				this.renderer.material.color = Color.green;
 			else this.renderer.material.color = Color.red;
-			this.gameObject.renderer.material.shader = Shader.Find("Transparent/Diffuse");
+			this.renderer.material.color -= new Color(0,0,0,.50f);
+
+
 		}
 	}
 }
