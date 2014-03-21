@@ -1,7 +1,7 @@
 var plane_capacity = 178; 
 
 
-var timer : timer;
+var timer : Component;
 
 
 var passenger : GameObject;
@@ -41,6 +41,8 @@ var start =false;
 var labels=false;
 
 var isPaused=false;
+
+var evacuated : int = 0;
 
 var panicCount : int = 0;
 var behaviouralInactionCount : int = 0;
@@ -277,7 +279,7 @@ function OnGUI()
 		}
 		
     	if (GUI.Button(Rect(0,130,100,40),"Start")){
-			/*timer.start_timer();*/
+			timer.start_timer();
 			//instantiate_passengers();
 			//initialise_results_box();
 			
@@ -317,6 +319,10 @@ function OnGUI()
     	
 }	
 
+public function updateEvac(){
+	evacuated++;
+}
+
 function initialise_results_box(){
 
 		GUI.Box (Rect (Screen.width - 110, 10, 100, 100), "Results");	
@@ -324,11 +330,11 @@ function initialise_results_box(){
 		GUILayout.BeginVertical();
 		GUILayout.BeginHorizontal();
 		GUILayout.Label("time: ");		
-		/*GUILayout.Label(timer.timer.ToString());*/
+		GUILayout.Label(timer.timer.ToString());
 		GUILayout.EndHorizontal();
 		GUILayout.BeginHorizontal();
 		GUILayout.Label("evacuated: ");		
-		GUILayout.Label("0");
+		GUILayout.Label(evacuated.ToString());
 		GUILayout.EndHorizontal();
 		GUILayout.EndVertical();		
 		GUILayout.EndArea();

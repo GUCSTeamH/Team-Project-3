@@ -47,9 +47,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\GUI.js" />
-     <Compile Include="Assets\Scripts\GUI Script.js" />
      <Compile Include="Assets\Scripts\Game Menu.js" />
-     <Compile Include="Assets\Scripts\Timer.js" />
      <Compile Include="Assets\Scripts\camera switch.js" />
      <Compile Include="Assets\Scripts\camera.js" />
      <Compile Include="Assets\Scripts\help text.js" />
