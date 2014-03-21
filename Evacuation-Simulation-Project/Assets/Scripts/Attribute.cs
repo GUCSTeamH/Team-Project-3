@@ -206,6 +206,52 @@ public class Attribute : MonoBehaviour {
 			this.gameObject.AddComponent("trigPass");
 		}
 	}
+
+	public void setTypeManual(RAINAgent ai){
+		
+		if (ai!=null){
+			if (type == "altruism"){
+				ai.Agent.actionContext.SetContextItem<string>("type", "altruism");
+				this.gameObject.transform.Find("Sphere").renderer.material.color = Color.green;
+			}
+			else if (type == "behaviouralinaction"){
+				ai.Agent.actionContext.SetContextItem<string>("type", "behaviouralinaction");
+				this.gameObject.transform.Find("Sphere").renderer.material.color = Color.yellow;
+			}
+			else if (type == "panic"){
+				ai.Agent.actionContext.SetContextItem<string>("type", "panic");
+				this.gameObject.transform.Find("Sphere").renderer.material.color = Color.red;
+			}
+			else {
+				ai.Agent.actionContext.SetContextItem<string>("type", "fearflight");
+				this.gameObject.transform.Find("Sphere").renderer.material.color = Color.gray;
+			}
+		}
+	}
+
+	void StartBehManual () {
+		RAINAgent ai = GetComponent<RAINAgent>();
+		
+		setAge(ai);
+		setGender(ai);
+		setTypeManual(ai);
+		
+		if (type == "panic"){
+			StartCoroutine(Wait(ai));
+			setPanicPosition(ai);
+		}
+		else if (type == "fearflight" || type == "behaviouralinaction"){
+			StartCoroutine(Wait(ai));
+		}
+		else if(type == "altruism"){
+			this.gameObject.AddComponent("trigPass");
+		}
+	}
+
+	void SetTypeManual(string type){
+		Debug.Log(type);
+		this.type = type;
+	}
 	
 	// Update is called once per frame
 	void Update () {

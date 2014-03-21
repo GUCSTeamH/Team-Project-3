@@ -285,11 +285,46 @@ function OnGUI()
 			
 			start=true;
 			labels=true;
-		for (var passenger : GameObject in passengers_active)
-		{
-		passenger.active = true;
-		passenger.GetComponent("Attribute").StartBeh();
-	}
+			if (altruism_boarded == 0 || panic_boarded == 0 || behaviouralinaction_boarded == 0 || fearflight_boarded == 0 ) {
+				for (var passenger : GameObject in passengers_active) {
+					passenger.active = true;
+					passenger.GetComponent("Attribute").StartBeh();
+				}
+			} else {
+				Debug.Log("manual behaviour");
+				var altr_count : int = 0;
+				var panic_count : int = 0;
+				var behav_count : int = 0;
+				var fear_count : int  = 0;
+				for (var passenger : GameObject in passengers_active) {
+					if (altr_count < altruism_boarded) {
+						passenger.active = true;
+						passenger.GetComponent("Attribute").SetTypeManual("altruism");
+						passenger.GetComponent("Attribute").StartBehManual();
+						altr_count++;
+						continue;
+					} else if (panic_count < panic_boarded) {
+						passenger.active = true;	
+						passenger.GetComponent("Attribute").SetTypeManual("panic");
+						passenger.GetComponent("Attribute").StartBehManual();
+						panic_count++;
+						continue;
+					} else if (behav_count < behaviour_boarded) {
+						passenger.active = true;	
+						passenger.GetComponent("Attribute").SetTypeManual("behaviouralinaction");
+						passenger.GetComponent("Attribute").StartBehManual();
+						behav_count++;
+						continue;
+					} else if (fear_count < fearflight_boarded) {
+						passenger.active = true;
+						passenger.GetComponent("Attribute").SetTypeManual("fearflight");
+						passenger.GetComponent("Attribute").StartBehManual();
+						fear_count++;
+						continue;
+					}
+				}
+				
+			}
 		}
 	}
 	
