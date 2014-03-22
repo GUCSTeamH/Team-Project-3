@@ -7,22 +7,29 @@ using System.Collections.Generic;
 public class closestDoor : MonoBehaviour {
 	public Vector3 targetPosition;
 	public string att;
-	public GameObject[] doors;
+	public getDoors doorScript;
+
+	public List<GameObject> doorslist;
 	
+
 	public void calculateDoor(){
 		
-		Debug.Log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-		doors = GameObject.FindGameObjectsWithTag("Door");
-		float minDistance = Vector3.Distance(transform.position, doors[0].transform.position);
-		string doorName=doors[0].name;
-		targetPosition = doors[0].transform.position;
+
+		GameObject plane = GameObject.FindGameObjectWithTag("plane");
+		doorScript =(getDoors) plane.GetComponent("getDoors");
+		doorslist = doorScript.doorslist;
+		Debug.Log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"+doorslist.Count);
+
+		float minDistance = Vector3.Distance(transform.position, doorslist[0].transform.position);
+		string doorName=doorslist[0].name;
+		targetPosition = doorslist[0].transform.position;
 		int i=1;
-		while (i<doors.Length){
-			float distance=Vector3.Distance(transform.position, doors[i].transform.position);
+		while (i<doorslist.Count){
+			float distance=Vector3.Distance(transform.position, doorslist[i].transform.position);
 			if (distance < minDistance){
-				doorName=doors[i].name;
+				doorName=doorslist[i].name;
 				minDistance=distance;
-				targetPosition=doors[i].transform.position;
+				targetPosition=doorslist[i].transform.position;
 			}
 			i++;
 		}

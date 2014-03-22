@@ -126,7 +126,7 @@ function total_determinator(){
 		GUI.Label (Rect (30, 0, 100, 30), "total");
 		if(labels == false){
     		total = GUILayout.TextField (total, 25);
-    		Debug.Log ("total = " + total);
+    		//Debug.Log ("total = " + total);
     		if(total != ""){
     			behaviour_boarded = parseInt(total);
     			if (behaviour_boarded > 178){ //user entered more than the capacity of the plane
