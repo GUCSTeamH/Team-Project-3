@@ -364,7 +364,7 @@ function OnGUI()
 						continue;
 					} else if (panic_count < panic_boarded) {
 						passenger.active = true;	
-						passenger.GetComponent("closestDoor").calculateDoor();
+						//passenger.GetComponent("closestDoor").calculateDoor();
 						passenger.GetComponent("Attribute").SetTypeManual("panic");
 						passenger.GetComponent("Attribute").StartBehManual();
 						panic_count++;
@@ -414,6 +414,11 @@ function OnGUI()
 
 public function updateEvac(){
 	evacuated++;
+	if ((evacuated == plane_capacity) || (timer.timer == 90)){
+		evacuation_done();
+		Debug.Log("--------------------------------------------------------");
+		}
+	
 }
 
 function initialise_results_box(){
@@ -426,7 +431,7 @@ function initialise_results_box(){
                 GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal();
                 GUILayout.Label("evacuated: ",GUILayout.Width(100));            
-                GUILayout.Label("0",GUILayout.Width(50));
+                GUILayout.Label(evacuated.ToString(),GUILayout.Width(50));
                 GUILayout.EndHorizontal();
                 GUILayout.BeginHorizontal();
                 GUILayout.Label("Front left: ",GUILayout.Width(100));           
@@ -530,34 +535,42 @@ function define_behaviour(passenger_type_boarded : int, color : Color) {
 
 public function updateEvacFL(){
 	front_left_count++;
+	updateEvac();
 }
 
 public function updateEvacFR(){
 	front_right_count++;
+	updateEvac();
 }
 
 public function updateEvacBR(){
 	rear_right_count++;
+	updateEvac();
 }
 
 public function updateEvacBL(){
 	rear_left_count++;
+	updateEvac();
 }
 
 public function updateEvacML1(){
 	first_middle_left_count++;
+	updateEvac();
 }
 
 public function updateEvacML2(){
 	second_middle_left_count++;
+	updateEvac();
 }
 
 public function updateEvacMR1(){
 	first_middle_right_count++;
+	updateEvac();
 }
 
 public function updateEvacMR2(){
 	second_middle_right_count++;
+	updateEvac();
 }
 
 

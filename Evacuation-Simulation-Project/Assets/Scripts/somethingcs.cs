@@ -7,6 +7,7 @@ using RAIN.Action;
 public class somethingcs : RAIN.Action.Action
 { bool flag = false;
 	Vector3 no;
+	public closestDoor script;
 	public somethingcs()
 	{
 		actionName = "somethingcs";
@@ -30,6 +31,8 @@ public class somethingcs : RAIN.Action.Action
 		}
 		agent.MoveTo(no, deltaTime);
 		if (Mathf.Abs((int) no.x - (int) pos.x) <=1  && Mathf.Abs((int) no.z - ((int) pos.z))<=1) {
+			script =(closestDoor) agent.Avatar.gameObject.GetComponent("closestDoor");
+			script.calculateDoor();
 			no = agent.actionContext.GetContextItem<Vector3>("door");
 			agent.MoveTo(no, deltaTime);
 		}
