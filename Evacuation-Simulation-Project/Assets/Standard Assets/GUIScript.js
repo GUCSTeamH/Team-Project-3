@@ -490,7 +490,7 @@ function evacuation_done(){
         GUILayout.BeginArea (Rect (Screen.width/2 - 50, Screen.height/2-30, 120, 140));
         GUILayout.BeginVertical();
 
-        GUILayout.Label("This is the end of this simulation. A total of "+behaviour_boarded+" evacuated for "+timer.timer.ToString()+" seconds.");
+        GUILayout.Label("This is the end of this simulation. A total of "+evacuated+" evacuated for "+timer.timer.ToString()+" seconds.");
         if(GUILayout.Button("OK")){
                 log_results();
                 Application.LoadLevel("Main Menu");

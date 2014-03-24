@@ -63,9 +63,6 @@ public class closestDoor : MonoBehaviour {
 				Debug.Log ("trigpass");
 				this.gameObject.AddComponent("trigPass");
 			}
-			else if (type == "behaviouralinaction"){
-				this.gameObject.AddComponent("BehaviouralInaction");
-			}
 		}
 		else print ("null");
 		//print(ai.Agent.actionContext.GetContextItem<string>("door"));
