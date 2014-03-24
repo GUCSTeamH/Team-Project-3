@@ -340,6 +340,8 @@ function OnGUI()
 			//instantiate_passengers();
 			//initialise_results_box();
 			
+			var openDoor = GameObject.FindGameObjectWithTag("plane").GetComponent("openDoors").onStart();
+			
 			start=true;
 			labels=true;
 			if (altruism_boarded == 0 && panic_boarded == 0 && behaviouralinaction_boarded == 0 && fearflight_boarded == 0 ) {
@@ -408,16 +410,16 @@ function OnGUI()
         
         initialise_results_box();
 		GUILayout.EndHorizontal();
-        GUILayout.EndArea();  		
+        GUILayout.EndArea();  
+        
+        if ((evacuated == plane_capacity) || (timer.timer == 90)){
+			evacuation_done();
+		}		
     	
 	}	
 
 public function updateEvac(){
 	evacuated++;
-	if ((evacuated == plane_capacity) || (timer.timer == 90)){
-		evacuation_done();
-		Debug.Log("--------------------------------------------------------");
-		}
 	
 }
 

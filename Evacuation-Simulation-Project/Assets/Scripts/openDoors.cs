@@ -4,7 +4,7 @@ using System.Collections;
 public class openDoors : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
+	void onStart () {
 		Debug.Log("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
 		StartCoroutine(Wait());
 	}
