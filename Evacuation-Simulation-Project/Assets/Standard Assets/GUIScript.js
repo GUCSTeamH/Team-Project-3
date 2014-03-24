@@ -392,7 +392,7 @@ function OnGUI()
 			startButtonText="Restart";
 		}
 		else if (startButton && start == true){
-                Application.LoadLevel("A320Scene (No Behaviour)");
+                Application.LoadLevel(Application.loadedLevel);
         }
 		
 	//quitting the animation
