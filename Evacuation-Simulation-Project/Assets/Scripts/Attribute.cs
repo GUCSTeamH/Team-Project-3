@@ -160,6 +160,8 @@ public class Attribute : MonoBehaviour {
 
 	/* Make them wait at the start before evacuation begins */
 	IEnumerator Wait(RAINAgent ai){
+		ai.Agent.actionContext.SetContextItem<bool>("runningCoroutine", true);
+
 		float x= ai.maxSpeed;
 		float mass = this.gameObject.rigidbody.mass;
 		int time = 0;
@@ -168,7 +170,7 @@ public class Attribute : MonoBehaviour {
 			time = Random.Range(5, 10);
 			this.gameObject.rigidbody.mass = 30;
 		}
-		else if (type == "fearflight"){
+		else if (type == "fearflight" || type == "altruism"){
 			time = Random.Range(10, 15);
 			this.gameObject.rigidbody.mass = 20;
 		}
@@ -185,6 +187,9 @@ public class Attribute : MonoBehaviour {
 		yield return new WaitForSeconds(time);
 		ai.maxSpeed = x;
 		this.gameObject.rigidbody.mass=mass;
+
+		ai.Agent.actionContext.SetContextItem<bool>("runningCoroutine", false);
+
 	}
 
 	// Use this for initialization
@@ -195,6 +200,8 @@ public class Attribute : MonoBehaviour {
 		setGender(ai);
 		setType(ai);
 
+		ai.Agent.actionContext.SetContextItem<bool>("runningCoroutine", false);
+
 		if (type == "panic"){
 			StartCoroutine(Wait(ai));
 			setPanicPosition(ai);
@@ -203,6 +210,7 @@ public class Attribute : MonoBehaviour {
 			StartCoroutine(Wait(ai));
 		}
 		else if(type == "altruism"){
+			StartCoroutine (Wait (ai));
 			this.gameObject.AddComponent("trigPass");
 		}
 	}
