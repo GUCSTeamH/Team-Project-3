@@ -35,10 +35,11 @@ public class DisableDoor : MonoBehaviour {
 				doorScript.addDoor(door);
 			}
 			else {
+				if (doorScript.removeDoor(door)){
 				check=1;
 				this.renderer.material.color = Color.red;
 				this.renderer.material.color -= new Color(0,0,0,.50f);
-					doorScript.removeDoor(door);
+				}
 			}
 			//this.renderer.material.color -= new Color(0,0,0,.50f);
 		}

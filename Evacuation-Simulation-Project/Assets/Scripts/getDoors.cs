@@ -22,12 +22,13 @@ public class getDoors : MonoBehaviour {
 
 	}
 
-	public void removeDoor(GameObject door) {
+	public bool removeDoor(GameObject door) {
 		if (doorslist.Count >1 ){
 			doorslist.Remove(door);
 			Debug.Log(doorslist.Count);
+			return true;
 		}
-		else Debug.Log("one door needs to be open at all times");
+		else return false;
 
 	}
 
