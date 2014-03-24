@@ -128,11 +128,14 @@ function total_determinator(){
     		total = GUILayout.TextField (total, 25);
     		//Debug.Log ("total = " + total);
     		if(total != ""){
+    		try{
     			behaviour_boarded = parseInt(total);
     			if (behaviour_boarded > 178){ //user entered more than the capacity of the plane
     				warning_exceeding_number("total");
     				//total_boarded = 178;
-    			}
+    			}}
+    	catch(err){
+}
     		}
     		else                          //should prompt the user to enter something
     			behaviour_boarded = 178;        //should be changed - mock up for now
@@ -150,9 +153,12 @@ function altruism_determinator(){
     	altruism = GUILayout.TextField (altruism, GUILayout.Width(50));
     
     	if(altruism != ""){
+    	  		try{
     		altruism_boarded = parseInt(altruism);
     		if(altruism_boarded > behaviour_boarded)     //if user entered a greater value than the total passengers
-    			warning_exceeding_number("total");
+    			warning_exceeding_number("total");}
+    		catch(err){
+}
     	}
     	else 
     		altruism_boarded = 0;     //change to ask the user to enter a value
@@ -171,9 +177,12 @@ function behaviouralinaction_determinator(){
     if(labels == false) {
     	behaviouralinaction = GUILayout.TextField (behaviouralinaction, GUILayout.Width(50));
     	if(behaviouralinaction != ""){
+    	  		try{
     		behaviouralinaction_boarded = parseInt(behaviouralinaction);
     		if(behaviouralinaction_boarded > behaviour_boarded)     //if user entered a greater value than the total passengers
-    			warning_exceeding_number("total");
+    			warning_exceeding_number("total");}
+    				catch(err){
+}
     	}
     	else 
     		behaviouralinaction_boarded = 0;     //change to ask the user to enter a value
@@ -192,9 +201,12 @@ function fearflight_determinator(){
     if(labels == false) {
     	fearflight = GUILayout.TextField (fearflight, GUILayout.Width(50));
     	if(fearflight != ""){
+    	  		try{
     		fearflight_boarded = parseInt(fearflight);
     		if(fearflight_boarded > behaviour_boarded)     //if user entered a greater value than the total passengers
-    			warning_exceeding_number("total");
+    			warning_exceeding_number("total");}
+    				catch(err){
+}
     	}
     	else 
     		fearflight_boarded = 0;     //change to ask the user to enter a value
@@ -213,9 +225,12 @@ function panic_determinator(){
     if(labels == false) {
     	panic = GUILayout.TextField (panic, GUILayout.Width(50));
     	if(panic != ""){
+    	  		try{
     		panic_boarded = parseInt(panic);
     		if(panic_boarded > behaviour_boarded)     //if user entered a greater value than the total passengers
-    			warning_exceeding_number("total");
+    			warning_exceeding_number("total");}
+    				catch(err){
+}
     	}
     	else 
     		panic_boarded = 0;     //change to ask the user to enter a value
@@ -255,10 +270,12 @@ function women_determinator(){
     if (labels==false) {	
     	women = GUILayout.TextField (women, GUILayout.Width(50));
     	if(women!=""){
-    	
+    	try{
     		women_boarded=parseInt(women);
-    		if(women_boarded > behaviour_boarded)     //if user entered a greater value than the total passengers
-    			warning_exceeding_number("total");
+    		if(women_boarded > behaviour_boarded)    //if user entered a greater value than the total passengers
+    			warning_exceeding_number("total");}
+    				catch(err){
+}
     		
     	}
     	else 
