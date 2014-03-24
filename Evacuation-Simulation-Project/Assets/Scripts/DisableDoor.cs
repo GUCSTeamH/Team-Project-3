@@ -19,6 +19,7 @@ public class DisableDoor : MonoBehaviour {
 
 
 	public void OnMouseDown(){
+		Debug.Log("here");
 		GameObject plane = GameObject.FindGameObjectWithTag("plane");
 		script =(GUIScript) plane.GetComponent("GUIScript");
 		doorScript =(getDoors) plane.GetComponent("getDoors");

@@ -23,8 +23,11 @@ public class getDoors : MonoBehaviour {
 	}
 
 	public void removeDoor(GameObject door) {
-		doorslist.Remove(door);
-		Debug.Log(doorslist.Count);
+		if (doorslist.Count >1 ){
+			doorslist.Remove(door);
+			Debug.Log(doorslist.Count);
+		}
+		else Debug.Log("one door needs to be open at all times");
 
 	}
 
