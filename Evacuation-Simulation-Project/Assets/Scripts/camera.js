@@ -1,19 +1,14 @@
-﻿var myCamPos : Vector3;
+﻿//the camera position
+var camera_position : Vector3;
 
 
-
+//get the start position of a camera so that the user can reset the position if they get lost
 function Start(){
-	myCamPos = transform.position;
+	camera_position = transform.position;
 }
+
+//keys to support extremely flexible camera movement
 function Update () {
-
-//if (Input.GetKey(KeyCode.UpArrow)) transform.Translate(Vector3.forward * Time.deltaTime * 10);
-
-//if (Input.GetKey(KeyCode.DownArrow)) transform.Translate(Vector3.back * Time.deltaTime * 10);
-
-//if (Input.GetKey(KeyCode.LeftArrow)) transform.Translate(Vector3.left * Time.deltaTime * 10);
-
-//if (Input.GetKey(KeyCode.RightArrow)) transform.Translate(Vector3.right * Time.deltaTime * 10);
 
 if (Input.GetKey(KeyCode.LeftShift)) transform.Translate(Vector3.up * Time.deltaTime * 10);
 
@@ -31,5 +26,6 @@ if (Input.GetKey(KeyCode.Q)) transform.Rotate(0, 0, 1);
 
 if (Input.GetKey(KeyCode.E)) transform.Rotate(0, 0, -1);
 
-if (Input.GetKey(KeyCode.K)) transform.position = myCamPos;
+if (Input.GetKey(KeyCode.K)) transform.position = camera_position;
+
 }

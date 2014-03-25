@@ -1,0 +1,4 @@
+total, altruism, behavioral inaction, fearflight, panic, total evacuation time
+0, 0, 0, 0, 0, 0
+0, 0, 0, 0, 0, 0
+0, 0, 0, 0, 0, 0

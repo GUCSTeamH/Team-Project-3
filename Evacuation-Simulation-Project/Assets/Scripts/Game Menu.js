@@ -1,3 +1,5 @@
+
+//check which one is selected; assign behaviours to different textures
 var isQuit=false;
 var isStart=false;
 var isOK=false;
@@ -6,80 +8,75 @@ var isCameraMovement=false;
 var isAbout=false;
 
 
+//change the color to red when the mouse is on the option
 function OnMouseEnter(){
-	//change text color
+	
 	renderer.material.color=Color.red;
+
 }
 
+
+//change the color to white when the mouse is not on the option
 function OnMouseExit(){
-	//change text color
+	
 	renderer.material.color=Color.white;
+
 }
 
+
+//handle user choice
 function OnMouseUp(){
-	//is this quit
+
+	//if the user wants to quit the application
 	if (isQuit==true) {
-		//quit the game
+	
 		Application.Quit();
+		
 	}
+	
+	//if the user wants to start a simulation
 	else if(isStart==true){
-		//load level
+
 		Application.LoadLevel("A320Scene (No Behaviour)");
-//isQuit=false;
-//isStart=false;
-//isOK=false;
-//isCameraControls=false;
-//isCameraMovement=false;
-//isAbout=false;
+
 	}
+	
+	//if the user wants to select OK- go to the main menu
 	else if(isOK==true){
-		//load level
+	
 		Application.LoadLevel("Main Menu");
-	//	var isQuit=false;
-//isStart=false;
-//isOK=false;
-//isCameraControls=false;
-//isCameraMovement=false;
-//isAbout=false;
+
 	}
 	
-		else if(isCameraControls==true){
-		//load level
+	//if the user wants to see help with the camera switch keys
+	else if(isCameraControls==true){
+		
 		Application.LoadLevel("Camera Controls");
-//isQuit=false;
-//isStart=false;
-//isOK=false;
-//isCameraControls=false;
-//isCameraMovement=false;
-//isAbout=false;
+
 	}
 	
-		else if(isCameraMovement==true){
-		//load level
+	//if the user wants to see help with the camera movement keys
+	else if(isCameraMovement==true){
+	
 		Application.LoadLevel("Camera Movement");
-//isQuit=false;
-//isStart=false;
-//isOK=false;
-//isCameraControls=false;
-//isCameraMovement=false;
-//isAbout=false;
+
 	}
 	
-		else if(isAbout==true){
+	//if the user wants to see the "About" section
+	else if(isAbout==true){
 		//load level
 		Application.LoadLevel("About");
-//isQuit=false;
-//isStart=false;
-//isOK=false;
-//isCameraControls=false;
-//isCameraMovement=false;
-//isAbout=false;
+
 	}
 }
 
+
+
+//quit the application if escape key is pressed
 function Update(){
-	//quit game if escape key is pressed
+
 	if (Input.GetKey(KeyCode.Escape)) {
     		Application.Quit();
 	}
+	
 }

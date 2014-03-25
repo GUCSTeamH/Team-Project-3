@@ -1,50 +1,24 @@
-﻿	var font : Font;
+﻿
+// The variable to control where the position of the scrollview
+var scrollPosition : Vector2 = Vector2.zero;
 
+// The message describing the program
+var message = "This is a computer program that conducts airplane evacuation simulations cheaply and safely while still providing the ability to gather data for a particular airplane model. In addition, it allows the user to vary different conditions and passenger behaviours  in order to examine their effects on the evacuation.";
+
+//defines the look of the message
+var guiSkin : GUISkin;
+
+
+//showing the message in a scroll view
+function OnGUI () {
 	
-	function Start(){
-	//guiText.font = font;
-	}
-	// The variable to control where the scrollview 'looks' into its child elements.
-	var scrollPosition : Vector2 = Vector2.zero;
-
-	// The string to display inside the scrollview. 2 buttons below add & clear this string.
-	var longString = "This is a computer program that conducts airplane evacuation simulations cheaply and safely while still providing the ability to gather data for a particular airplane model. In addition, it allows the user to vary different conditions and passenger behaviours  in order to examine their effects on the evacuation.";
-	function OnGUI () {	
-	
-		GUI.skin.label.font = font;
-		GUI.skin.label.fontSize=25;
- 	var textArea = new Rect (50, 150, Screen.width-100 , Screen.height-100);
-	GUI.Label(textArea,longString);
-			GUI.skin.label.font = null;
-		GUI.skin.label.fontSize = 15;
-	/*	//GUI.Box (Rect (50, 50, Screen.width - 100, Screen.height-100),"Warning!");	    	// Make a group on the center of the screen
-	GUILayout.BeginArea (Rect (150, 150, Screen.width-300 , Screen.height-300));
-		scrollPosition = GUILayout.BeginScrollView (
-			scrollPosition, GUILayout.Width (Screen.width -300), GUILayout.Height (Screen.height-300));
-		GUILayout.BeginVertical();
-		// We just add a single label to go inside the scroll view. Note how the
-		// scrollbars will work correctly with wordwrap.
-		//var keyStyle= new GUIStyle();
-		//keyStyle.fontSize = 25;
-		
-		//var titleStyle= new GUIStyle();
-		//titleStyle.fontSize = 40;
-
-	
-		
-		//GUILayout.Label ("Camera Switch Controls",titleStyle);
-		GUI.skin.label.font = font;
-		GUI.skin.label.fontSize=25;
-		GUILayout.Label (longString);		
-
-		GUI.skin.label.font = null;
-		GUI.skin.label.fontSize = 15;
-
-		// End the scrollview we began above.
+	GUI.skin = guiSkin;
+	GUI.skin.box.fontSize = 22;
+	GUILayout.BeginArea (Rect(150, 130, Screen.width-300, Screen.height-220));
+ 	scrollPosition = GUILayout.BeginScrollView (scrollPosition);
+	GUI.skin.box.wordWrap = true; 
+	GUILayout.Box(message);        
 	GUILayout.EndScrollView ();
- 
-
-	GUILayout.EndVertical();
 	GUILayout.EndArea();
-	*/
-	}	
+	
+}	

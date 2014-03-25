@@ -1,14 +1,23 @@
-﻿using UnityEngine;
+﻿/*
+ * script that destroys a game object on collision and updates the counters corresponding
+ * to the door that destroyed the game object
+ */ 
+
+using UnityEngine;
 using System.Collections;
 
 public class trig : MonoBehaviour {
 	public GUIScript script;
-	
+
+	//when an object collides with a door
 	void OnTriggerStay (Collider other) {
 		GameObject plane = GameObject.FindGameObjectWithTag("plane");
 		script =(GUIScript) plane.GetComponent("GUIScript");
-		//RAINAgent ai=GetComponent<RAINAgent>();
-		//string door = ai.Agent.actionContext.GetContextItem<string>("doorName");
+	
+		//since the passengers have 2 colliders, to enable some of them to give
+		//priority whenever they collide with another passenger, this script will register
+		//every collision, making that 2 / passenger
+		//the check below is to ensure every collision is registered once
 		if (!other.isTrigger){
 			if (this.gameObject.name == "DoorFL") script.updateEvacFL();
 			else if (this.gameObject.name == "DoorFR") script.updateEvacFR();

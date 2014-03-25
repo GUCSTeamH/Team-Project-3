@@ -1,4 +1,5 @@
-﻿var frontCamera: Camera;
+﻿//variables for the different cameras
+var frontCamera: Camera;
 var backCamera : Camera;
 var leftCamera: Camera;
 var rightCamera : Camera;
@@ -7,11 +8,11 @@ var movingCamera: Camera;
 var currentCamera: Camera;
 
 
-
+//the moving vector position for the camera
 var movingCamPos : Vector3;
 
  
-
+//set the current camera to the moving camera for more flexibility at the start
 function Start()
 
 {
@@ -19,13 +20,16 @@ function Start()
   currentCamera = movingCamera;
   currentCamera.enabled = true;
   movingCamPos = transform.position;
+  
 }
 
 
+//handling camera switching
 function Update () {
 
-
+	//switch to front camera, disable all the rest
     if(Input.GetKeyDown("1")){
+	
 	    frontCamera.enabled = true;
 	    backCamera.enabled = false;
 	    topCamera.enabled = false;
@@ -33,8 +37,12 @@ function Update () {
 	    rightCamera.enabled = false;
 	    movingCamera.enabled = false;
 	    currentCamera = frontCamera;
+		
     }
+	
+	//switch to back camera, disable all the rest
     if(Input.GetKeyDown("2")){
+	
 	    frontCamera.enabled = false;
 	    backCamera.enabled = true;
 	    topCamera.enabled = false;
@@ -42,8 +50,12 @@ function Update () {
 	    rightCamera.enabled = false;
 	    movingCamera.enabled = false;
 	    currentCamera = backCamera;
+		
     }
+	
+	//switch to top camera, disable all the rest
     if(Input.GetKeyDown("3")){
+	
 	    frontCamera.enabled = false;
 	    backCamera.enabled = false;
 	    topCamera.enabled = true;
@@ -51,8 +63,12 @@ function Update () {
 	    rightCamera.enabled = false;
 	    movingCamera.enabled = false;
 	    currentCamera = topCamera;
+		
     }
+	
+	//switch to left camera, disable all the rest
     if(Input.GetKeyDown("4")){
+	
 	    frontCamera.enabled = false;
 	    backCamera.enabled = false;
 	    topCamera.enabled = false;
@@ -60,7 +76,10 @@ function Update () {
 	    rightCamera.enabled = false;
 	    movingCamera.enabled = false;
 	    currentCamera = leftCamera;
-}
+		
+	}
+	
+	//switch to right camera, disable all the rest
     if(Input.GetKeyDown("5")){
 	    frontCamera.enabled = false;
 	    backCamera.enabled = false;
@@ -71,7 +90,10 @@ function Update () {
 	   	currentCamera = rightCamera;
 
     }
+	
+	//switch to moving camera, disable all the rest
     if(Input.GetKeyDown("6")){
+	
 	    frontCamera.enabled = false;
 	    backCamera.enabled = false;
 	    topCamera.enabled = false;
@@ -79,9 +101,12 @@ function Update () {
 	    rightCamera.enabled = false;
 	    movingCamera.enabled = true;
 	   	currentCamera = movingCamera;
+		
 
     }
-    // transform.position = frontCamPos;
+    
+	
+	//define movement keys for cameras
     if (Input.GetKey(KeyCode.UpArrow)) currentCamera.transform.Translate(Vector3.forward * Time.deltaTime * 10);
 
 	if (Input.GetKey(KeyCode.DownArrow)) currentCamera.transform.Translate(Vector3.back * Time.deltaTime * 10);
@@ -90,27 +115,6 @@ function Update () {
 
 	if (Input.GetKey(KeyCode.RightArrow)) currentCamera.transform.Translate(Vector3.right * Time.deltaTime * 10);
 
-	//if (Input.GetKey(KeyCode.K)) currentCamera.transform.position = frontCamPos;
-	
-	
-	/*if(currentCamera == movingCamera){
-		if (Input.GetKey(KeyCode.LeftShift)) transform.Translate(Vector3.up * Time.deltaTime * 10);
-		
-		if (Input.GetKey(KeyCode.LeftControl)) transform.Translate(Vector3.down * Time.deltaTime * 10);
-		
-		if (Input.GetKey(KeyCode.A)) transform.Rotate(0, 1, 0);
-		
-		if (Input.GetKey(KeyCode.D)) transform.Rotate(0, -1, 0);
-		
-		if (Input.GetKey(KeyCode.W)) transform.Rotate(1, 0, 0);
-		
-		if (Input.GetKey(KeyCode.S)) transform.Rotate(-1, 0, 0);
-		
-		if (Input.GetKey(KeyCode.Q)) transform.Rotate(0, 0, 1);
-		
-		if (Input.GetKey(KeyCode.E)) transform.Rotate(0, 0, -1);
-		if (Input.GetKey(KeyCode.K)) currentCamera.position = movingCamPos;
-	}*/
 }
 
 

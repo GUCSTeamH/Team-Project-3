@@ -1,0 +1,4 @@
+front left door, front right door, first middle left door, first middle right door, second middle left door, second middle right door, rear left door, rear right door
+0,0, 0, 0, 0, 0, 0, 0
+0,0, 0, 0, 0, 0, 0, 0
+0,0, 0, 0, 0, 0, 0, 0
