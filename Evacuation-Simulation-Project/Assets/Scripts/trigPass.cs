@@ -19,25 +19,10 @@ public class trigPass : MonoBehaviour {
 
 		if (otherAI != null){
 			if (other.gameObject.name=="Passenger" && otherAI != null && i < limit){
-				bool otherOverFifty = otherAI.Agent.actionContext.GetContextItem<bool>("overFifty");
-				bool otherGender = otherAI.Agent.actionContext.GetContextItem<bool>("gender");
 				
 				int random = Random.Range(0, 100);
-				int range;
-				if (otherGender && otherOverFifty){
-					range = 100;
-				}
-				else if (!otherGender && otherOverFifty){
-					range = 85;
-				}
-				else if (otherGender && !otherOverFifty){
-					range = 70;
-				}
-				else{
-					range = 55;
-				}
 				
-				if (random < range){
+				if (random < 75){
 					StartCoroutine(Wait(ai));
 				}
 				i++;

@@ -11,147 +11,37 @@ public class Attribute : MonoBehaviour {
 	public int monteCarlo(){
 		return (Random.Range(0, 100));
 	}
-
-	/* According to ICAO standards for evacuation simulations */
-	public void setAge(RAINAgent ai){
-		int random = monteCarlo();
-
-		if (random < 35){
-			overFifty = true;
-		}
-		else{
-			overFifty = false;
-		}
-		ai.Agent.actionContext.SetContextItem<bool>("overFifty", overFifty);
-	}
 	
-	/* 1 for female, 0 for male */
-	public void setGender(RAINAgent ai){
-		int random;
-
-		random = monteCarlo();
-		if (random < 40){
-			gender = true;
-		}
-		else{
-			gender = false;
-		}
-
-		random = monteCarlo();
-		if (overFifty){
-			if (random < 15){
-				gender = true;
-			}
-			else{
-				gender = false;
-			}
-		}
-		ai.Agent.actionContext.SetContextItem<bool>("gender", gender);
-	}
-
 	/* Types - Altruism, Behavioural-Inaction, Panic, Fear-Flight */ 
 	public void setType(RAINAgent ai){
 
 		if (ai!=null){
 			int random = monteCarlo();
 
-			if (gender){
-				if (overFifty){
-					if (random < 20){
-						ai.Agent.actionContext.SetContextItem<string>("type", "altruism");
-						type = "altruism";
-						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.green;
-					}
-					else if (random < 50){
-						type = "behaviouralinaction";
-						ai.Agent.actionContext.SetContextItem<string>("type", "behaviouralinaction");
-						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.yellow;
-					}
-					else if (random < 55){
-						type = "panic";
-						ai.Agent.actionContext.SetContextItem<string>("type", "panic");
-						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.red;
-					}
-					else{
-						type = "fearflight";
-						ai.Agent.actionContext.SetContextItem<string>("type", "fearflight");
-						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.gray;
-					}
-				}
-				else{
-					if (random < 15){
-						ai.Agent.actionContext.SetContextItem<string>("type", "altruism");
-						type = "altruism";
-						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.green;
-					}
-					else if (random < 40){
-						type = "behaviouralinaction";
-						ai.Agent.actionContext.SetContextItem<string>("type", "behaviouralinaction");
-						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.yellow;
-					}
-					else if (random < 50){
-						type = "panic";
-						ai.Agent.actionContext.SetContextItem<string>("type", "panic");
-						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.red;
-					}
-					else{
-						type = "fearflight";
-						ai.Agent.actionContext.SetContextItem<string>("type", "fearflight");
-						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.gray;
-					}
-				}
+			if (random < 20){
+				ai.Agent.actionContext.SetContextItem<string>("type", "altruism");
+				type = "altruism";
+				this.gameObject.transform.Find("Sphere").renderer.material.color = Color.green;
+			}
+			else if (random < 50){
+				type = "behaviouralinaction";
+				ai.Agent.actionContext.SetContextItem<string>("type", "behaviouralinaction");
+				this.gameObject.transform.Find("Sphere").renderer.material.color = Color.yellow;
+			}
+			else if (random < 55){
+				type = "panic";
+				ai.Agent.actionContext.SetContextItem<string>("type", "panic");
+				this.gameObject.transform.Find("Sphere").renderer.material.color = Color.red;
 			}
 			else{
-				if (overFifty){
-					if (random < 15){
-						ai.Agent.actionContext.SetContextItem<string>("type", "altruism");
-						type = "altruism";
-						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.green;
-					}
-					else if (random < 40){
-						type = "behaviouralinaction";
-						ai.Agent.actionContext.SetContextItem<string>("type", "behaviouralinaction");
-						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.yellow;
-					}
-					else if (random < 50){
-						type = "panic";
-						ai.Agent.actionContext.SetContextItem<string>("type", "panic");
-						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.red;
-					}
-					else{
-						type = "fearflight";
-						ai.Agent.actionContext.SetContextItem<string>("type", "fearflight");
-						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.gray;
-					}
-				}
-				else{
-					if (random < 10){
-						ai.Agent.actionContext.SetContextItem<string>("type", "altruism");
-						type = "altruism";
-						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.green;
-					}
-					else if (random < 30){
-						type = "behaviouralinaction";
-						ai.Agent.actionContext.SetContextItem<string>("type", "behaviouralinaction");
-						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.yellow;
-					}
-					else if (random < 50){
-						type = "panic";
-						ai.Agent.actionContext.SetContextItem<string>("type", "panic");
-						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.red;
-					}
-					else{
-						type = "fearflight";
-						ai.Agent.actionContext.SetContextItem<string>("type", "fearflight");
-						this.gameObject.transform.Find("Sphere").renderer.material.color = Color.gray;
-					}
-				}
+				type = "fearflight";
+				ai.Agent.actionContext.SetContextItem<string>("type", "fearflight");
+				this.gameObject.transform.Find("Sphere").renderer.material.color = Color.gray;
 			}
 		}
-
 	}
 
-	void setPanicPosition(RAINAgent ai){
+	public void setPanicPosition(RAINAgent ai){
 		Vector3 currPos = this.gameObject.transform.position;
 		float z = Random.Range(currPos.z - 10, currPos.z + 10);
 		Vector3 newPos = new Vector3((float)17, (float)8, z);
@@ -195,9 +85,7 @@ public class Attribute : MonoBehaviour {
 	// Use this for initialization
 	void StartBeh () {
 		RAINAgent ai = GetComponent<RAINAgent>();
-
-		setAge(ai);
-		setGender(ai);
+	
 		setType(ai);
 
 		ai.Agent.actionContext.SetContextItem<bool>("runningCoroutine", false);
@@ -239,9 +127,7 @@ public class Attribute : MonoBehaviour {
 
 	void StartBehManual () {
 		RAINAgent ai = GetComponent<RAINAgent>();
-		
-		setAge(ai);
-		setGender(ai);
+
 		setTypeManual(ai);
 		
 		if (type == "panic"){
