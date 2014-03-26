@@ -47,13 +47,10 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\RAIN\Editor\ScriptTemplates\ActionTemplate_JS.js" />
-     <None Include="Assets\evacuation_results.txt" />
      <None Include="Assets\RAIN\releasenotes.txt" />
      <None Include="Assets\AI\Resources\BehaviorTrees\Behaviour.xml" />
      <None Include="Assets\iTween\ReadMe!\ReadMe!.txt" />
      <None Include="Assets\AI\Resources\BehaviorTrees\test.xml" />
-     <None Include="Assets\evacuation_doors_results.txt" />
-     <None Include="Assets\results.txt" />
      <None Include="Assets\RAIN\Editor\ScriptTemplates\BehaviorTreeTemplate.xml" />
      <None Include="Assets\AI\Resources\BehaviorTrees\AllMove.xml" />
  <Reference Include="Assembly-UnityScript-firstpass">
