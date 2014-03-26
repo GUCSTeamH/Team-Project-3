@@ -23,12 +23,12 @@ public class Attribute : MonoBehaviour {
 				type = "altruism";
 				this.gameObject.transform.Find("Sphere").renderer.material.color = Color.green;
 			}
-			else if (random < 50){
+			else if (random < 45){
 				type = "behaviouralinaction";
 				ai.Agent.actionContext.SetContextItem<string>("type", "behaviouralinaction");
 				this.gameObject.transform.Find("Sphere").renderer.material.color = Color.yellow;
 			}
-			else if (random < 55){
+			else if (random < 50){
 				type = "panic";
 				ai.Agent.actionContext.SetContextItem<string>("type", "panic");
 				this.gameObject.transform.Find("Sphere").renderer.material.color = Color.red;
