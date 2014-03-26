@@ -95,6 +95,7 @@ var logText = "Results not logged yet.";
 //tells if a warning appears on screen or not
 var warning = false;
 
+
 //tells if the user tried to disable all the doors
 public var allDoorsDisabled = false;
 
@@ -132,8 +133,6 @@ function log_results(){
 
 
 
-
-
 //fuction to show the user the total number of passengers
 function total_determinator(){
 
@@ -149,10 +148,16 @@ function total_determinator(){
    			warning_bad_number();
    			
    		}
+   		
+   		//run default simulation
+   		if(behaviour_boarded == 0){
+   		
+    		behaviour_boarded = plane_capacity;
+    	}
     }
     //show what the total number of passengers is
     else {
-    
+
     	GUILayout.Label (behaviour_boarded.ToString(),GUILayout.Width(textFieldWidth) );
         GUILayout.Label ("total",GUILayout.Width(labelWidth));
     
@@ -285,7 +290,7 @@ function behaviouralinaction_determinator(){
 //fuction to enable the user to choose the number of fearflight passengers through the GUI
 function fearflight_determinator(){
 
-	style.normal.textColor = Color.cyan;
+	style.normal.textColor = Color.grey;
 	GUILayout.BeginHorizontal(); 		
 
     if (labels==false) {
@@ -454,8 +459,7 @@ function OnGUI(){
    
     //start the animation
     if (startButton && start == false && warning == false){
-    
-    	
+
 		timer.start_timer();
 		var passengers_created : int  = 0;
 		var openDoor = GameObject.FindGameObjectWithTag("plane").GetComponent("openDoors").onStart();
@@ -469,55 +473,70 @@ function OnGUI(){
 		var behav_count : int = 0;
 		var fear_count : int  = 0;
 		
-		//activate the required number of passengers having the required behaviour
-		while (passengers_created < behaviour_boarded && passengers_created < plane_capacity){
-			
-			//choose a random passenger to activate
-			var random_passenger = generate_random_passenger();
-			passenger = passengers_active[random_passenger];
-			
-			
-			//determine the passenger's behaviour
-			if (altr_count < altruism_boarded) {
-			
-				passenger.active = true;
-				passenger.GetComponent("closestDoor").calculateDoor();
-				passenger.GetComponent("Attribute").SetTypeManual("altruism");
-				passenger.GetComponent("Attribute").StartBehManual();
-				altr_count++;
+		//default simulation is run with full plane capacity and random behaviours assigned
+		if (altruism_boarded == 0 && panic_boarded == 0 && behaviouralinaction_boarded == 0 && fearflight_boarded == 0 ) {
 
-				
-			}
-			else if (panic_count < panic_boarded) {
-			
-				passenger.active = true;	
-				passenger.GetComponent("closestDoor").calculateDoor();
-				passenger.GetComponent("Attribute").SetTypeManual("panic");
-				passenger.GetComponent("Attribute").StartBehManual();
-				panic_count++;
-				
-			}
-			else if (behav_count < behaviouralinaction_boarded) {
-			
-				passenger.active = true;	
-				passenger.GetComponent("closestDoor").calculateDoor();
-				passenger.GetComponent("Attribute").SetTypeManual("behaviouralinaction");
-				passenger.GetComponent("Attribute").StartBehManual();
-				behav_count++;
-				
-			}
-			else if (fear_count < fearflight_boarded) {
-			
-				passenger.active = true;
-				passenger.GetComponent("closestDoor").calculateDoor();
-				passenger.GetComponent("Attribute").SetTypeManual("fearflight");
-				passenger.GetComponent("Attribute").StartBehManual();
-				fear_count++;
-				
-			}
-			
-			passengers_created++;
+			for (var pass : GameObject in passengers_active) {
 
+ 				pass.active = true;
+				pass.GetComponent("closestDoor").calculateDoor();
+				pass.GetComponent("Attribute").StartBeh();
+
+ 				}
+ 			}
+ 		
+ 		//custom simulation is run with total passengers and numbers of people with a specific behaviour chosen by the user	
+ 		else{
+			//activate the required number of passengers having the required behaviour
+			while (passengers_created < behaviour_boarded && passengers_created < plane_capacity){
+				
+				//choose a random passenger to activate
+				var random_passenger = generate_random_passenger();
+				passenger = passengers_active[random_passenger];
+				
+				
+				//determine the passenger's behaviour
+				if (altr_count < altruism_boarded) {
+				
+					passenger.active = true;
+					passenger.GetComponent("closestDoor").calculateDoor();
+					passenger.GetComponent("Attribute").SetTypeManual("altruism");
+					passenger.GetComponent("Attribute").StartBehManual();
+					altr_count++;
+
+					
+				}
+				else if (panic_count < panic_boarded) {
+				
+					passenger.active = true;	
+					passenger.GetComponent("closestDoor").calculateDoor();
+					passenger.GetComponent("Attribute").SetTypeManual("panic");
+					passenger.GetComponent("Attribute").StartBehManual();
+					panic_count++;
+					
+				}
+				else if (behav_count < behaviouralinaction_boarded) {
+				
+					passenger.active = true;	
+					passenger.GetComponent("closestDoor").calculateDoor();
+					passenger.GetComponent("Attribute").SetTypeManual("behaviouralinaction");
+					passenger.GetComponent("Attribute").StartBehManual();
+					behav_count++;
+					
+				}
+				else if (fear_count < fearflight_boarded) {
+				
+					passenger.active = true;
+					passenger.GetComponent("closestDoor").calculateDoor();
+					passenger.GetComponent("Attribute").SetTypeManual("fearflight");
+					passenger.GetComponent("Attribute").StartBehManual();
+					fear_count++;
+					
+				}
+				
+				passengers_created++;
+
+			}
 		}
 
 		startButtonText="Restart";
@@ -651,6 +670,10 @@ function warning_doors(){
 
 
 
+
+
+
+
 //reports to the user that the evacuation is finished
 function evacuation_done(){
 
@@ -765,8 +788,3 @@ public function updateEvacMR2(){
 	updateEvac();
 	
 }
-
-
-
-
-

@@ -2,3 +2,4 @@ front left door, front right door, first middle left door, first middle right do
 0,0, 0, 0, 0, 0, 0, 0
 0,0, 0, 0, 0, 0, 0, 0
 0,0, 0, 0, 0, 0, 0, 0
+0,0, 0, 0, 0, 0, 0, 0
