@@ -29,6 +29,11 @@ public class getDoors : MonoBehaviour {
 			doorslist.Remove(door);
 			return true;
 		}
+		else {
+			GameObject plane = GameObject.FindGameObjectWithTag("plane");
+			GUIScript script =(GUIScript) plane.GetComponent("GUIScript");
+			script.allDoorsDisabled = true;
+		}
 		return false;
 
 	}
