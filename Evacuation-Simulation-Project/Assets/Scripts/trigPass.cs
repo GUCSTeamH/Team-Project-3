@@ -24,8 +24,9 @@ public class trigPass : MonoBehaviour {
 				
 				if (random < 75){
 					StartCoroutine(Wait(ai));
+					i++;
 				}
-				i++;
+
 				
 			}
 		}
