@@ -37,7 +37,7 @@ function OnMouseUp(){
 	//if the user wants to start a simulation
 	else if(isStart==true){
 
-		Application.LoadLevel("A320Scene (No Behaviour)");
+		Application.LoadLevel("A320Scene");
 
 	}
 	

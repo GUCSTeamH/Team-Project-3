@@ -591,9 +591,9 @@ function initialise_results_box(){
 	GUILayout.BeginArea (Rect (Screen.width - resultBoxWidth, 0, resultBoxWidth, Screen.height));
 	GUILayout.BeginVertical();
 	GUILayout.BeginHorizontal();
-	GUILayout.Label("time: ",GUILayout.Width(labelWidth));		
+	GUILayout.Label("Time: ",GUILayout.Width(labelWidth));		
 	GUILayout.Label(timer.timer.ToString(),GUILayout.Width(counterLabelWidth));
-	GUILayout.Label("evacuated: ",GUILayout.Width(labelWidth));		
+	GUILayout.Label("Evacuated: ",GUILayout.Width(labelWidth));		
 	GUILayout.Label(evacuated.ToString(),GUILayout.Width(counterLabelWidth));
 	GUILayout.EndHorizontal();
 	GUILayout.BeginHorizontal();

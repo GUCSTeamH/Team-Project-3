@@ -8,6 +8,8 @@
  * by a random number generator, making the decision to choose the initial door
  * 50% probable.
  * */
+
+//script makes use of the RAIN{Indie} plugin for Unity3D, found at : http://rivaltheory.com/rain/
 using UnityEngine;
 using System.Collections;
 using RAIN.Core;

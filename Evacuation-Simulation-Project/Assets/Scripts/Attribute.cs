@@ -1,4 +1,10 @@
-﻿using UnityEngine;
+﻿/*
+ * script that assigns a particulat behaviour type to a passenger
+ * 
+ * script uses RAIN{Indie} plugin, found at : http://rivaltheory.com/rain/
+ */ 
+
+using UnityEngine;
 using System.Collections;
 using RAIN.Core;
 using RAIN.Action;
@@ -12,7 +18,9 @@ public class Attribute : MonoBehaviour {
 		return (Random.Range(0, 100));
 	}
 	
-	/* Types - Altruism, Behavioural-Inaction, Panic, Fear-Flight */ 
+	/* Types - Altruism, Behavioural-Inaction, Panic, Fear-Flight 
+	 * Also set colour according to the behaviour type
+	 */ 
 	public void setType(RAINAgent ai){
 
 		if (ai!=null){
@@ -41,6 +49,10 @@ public class Attribute : MonoBehaviour {
 		}
 	}
 
+
+	/* create a random position for the panic passenger to move to before moving to its
+	 * closest door 
+	 */
 	public void setPanicPosition(RAINAgent ai){
 		Vector3 currPos = this.gameObject.transform.position;
 		float z = Random.Range(currPos.z - 10, currPos.z + 10);
@@ -50,12 +62,16 @@ public class Attribute : MonoBehaviour {
 
 	/* Make them wait at the start before evacuation begins */
 	IEnumerator Wait(RAINAgent ai){
+
+		//set the value corresponding to coroutines to be true, so the passenger does not
+		//enter another coroutine before exiting the present one
 		ai.Agent.actionContext.SetContextItem<bool>("runningCoroutine", true);
 
 		float x= ai.maxSpeed;
 		float mass = this.gameObject.rigidbody.mass;
 		int time = 0;
-		Debug.Log("REACHED HERE");
+
+		//modify waiting times and masses according to behaviour type
 		if (type == "panic"){
 			time = Random.Range(5, 10);
 			this.gameObject.rigidbody.mass = 30;
@@ -70,26 +86,34 @@ public class Attribute : MonoBehaviour {
 		}
 
 		if (ai!=null){
-			//print ("not null");
 			ai.maxSpeed = 0;
 		}
-		//		yield WaitForSeconds(30);
+		// suspend the execution of the coroutine for the specified amount of time
 		yield return new WaitForSeconds(time);
+
+		//return speed and mass to original values
 		ai.maxSpeed = x;
 		this.gameObject.rigidbody.mass=mass;
 
+		//register exit from coroutine
 		ai.Agent.actionContext.SetContextItem<bool>("runningCoroutine", false);
 
 	}
 
-	// Use this for initialization
+	// start the assignment of behaviours
 	void StartBeh () {
+
+		//get the agent
 		RAINAgent ai = GetComponent<RAINAgent>();
 	
+		//assign type
 		setType(ai);
 
+		//set coroutine variable
 		ai.Agent.actionContext.SetContextItem<bool>("runningCoroutine", false);
 
+
+		//according to behaviour type, add script or start coroutines
 		if (type == "panic"){
 			StartCoroutine(Wait(ai));
 			setPanicPosition(ai);
@@ -103,6 +127,8 @@ public class Attribute : MonoBehaviour {
 		}
 	}
 
+
+	//set behaviours manually, including colour and variable in the action context
 	public void setTypeManual(RAINAgent ai){
 		
 		if (ai!=null){
@@ -145,10 +171,5 @@ public class Attribute : MonoBehaviour {
 	void SetTypeManual(string type){
 		Debug.Log(type);
 		this.type = type;
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 }

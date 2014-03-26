@@ -56,6 +56,7 @@
      <Compile Include="Assets\Standard Assets\Scripts\Camera Scripts\SmoothFollow.js" />
      <Compile Include="Assets\Standard Assets\Scripts\Camera Scripts\SmoothLookAt.js" />
      <Compile Include="Assets\Standard Assets\Scripts\General Scripts\DragRigidbody.js" />
+     <Compile Include="Assets\Standard Assets\timer.js" />
      <None Include="Assets\RAIN\releasenotes.txt" />
      <None Include="Assets\AI\Resources\BehaviorTrees\Behaviour.xml" />
      <None Include="Assets\iTween\ReadMe!\ReadMe!.txt" />
