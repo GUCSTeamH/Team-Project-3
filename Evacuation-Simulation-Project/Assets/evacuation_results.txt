@@ -7,3 +7,6 @@ total, altruism, behavioral inaction, fearflight, panic, total evacuation time
 178, 0, 0, 0, 0, 90
 178, 0, 0, 0, 0, 62
 178, 0, 0, 0, 0, 60
+5, 0, 0, 0, 5, 34
+178, 0, 0, 0, 178, 46
+1, 0, 0, 0, 1, 17

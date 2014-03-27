@@ -27,7 +27,7 @@ public class trig : MonoBehaviour {
 			else if (this.gameObject.name == "DoorML2") script.updateEvacML2();
 			else if (this.gameObject.name == "DoorMR1") script.updateEvacMR1();
 			else if (this.gameObject.name == "DoorMR2") script.updateEvacMR2();
-			Destroy (other.gameObject);
+			other.gameObject.SetActive(false);
 		}
 		
 	}

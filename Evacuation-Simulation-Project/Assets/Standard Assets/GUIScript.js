@@ -111,21 +111,21 @@ function log_results(){
 
 	//insert header to the files if they didn't exist
 	if (!System.IO.File.Exists(Application.dataPath +"/"+evacuation_results_filename)){
-	
-	    File.AppendAllText(Application.dataPath +"/"+evacuation_results_filename,"total, altruism, behavioral inaction, fearflight, panic, total evacuation time"+ Environment.NewLine);
-	
+
+	    File.AppendAllText(Application.dataPath +"/"+evacuation_results_filename,"total passengers, altruism, behavioral inaction, fearflight, panic, current evacuation time"+ Environment.NewLine);
+
 	}
-	
+
 	if (!System.IO.File.Exists(Application.dataPath +"/"+evacuation_doors_filename)){
-	
+
 	    File.AppendAllText(Application.dataPath +"/"+evacuation_doors_filename,"front left door, front right door, first middle left door, first middle right door, second middle left door, second middle right door, rear left door, rear right door"+ Environment.NewLine);
-	
+
 	}
-	
+
 	//insert data in the result files
 	var evacuation_results : String = behaviour_boarded+", "+altruism_boarded +", "+behaviouralinaction_boarded +", "+fearflight_boarded +", "+panic_boarded +", "+timer.timer.ToString();
 	File.AppendAllText(Application.dataPath +"/"+evacuation_results_filename,evacuation_results+ Environment.NewLine);
-	
+
 	var door_results : String = front_left_count+","+front_right_count+", "+first_middle_left_count+", "+first_middle_right_count+", "+second_middle_left_count+", "+second_middle_right_count+", "+rear_left_count+", "+rear_right_count;
 	File.AppendAllText(Application.dataPath +"/"+evacuation_doors_filename,door_results+ Environment.NewLine);
 
@@ -137,9 +137,9 @@ function log_results(){
 function total_determinator(){
 
 	GUILayout.BeginHorizontal();
-	 
+
 	if(labels == false){
-	
+
 	    //the total number of passengers is the sum of the different behaviours
     	behaviour_boarded = altruism_boarded + behaviouralinaction_boarded + fearflight_boarded + panic_boarded;
    		//if the total number of passengers is greater than the plane capacity show a warning to the user
@@ -174,7 +174,7 @@ function altruism_determinator(){
 
 	style.normal.textColor = Color.green;
 	GUILayout.BeginHorizontal(); 
-	
+
     if(labels == false) {
     
     	//the text field for the user to enter a number
@@ -185,15 +185,15 @@ function altruism_determinator(){
     	    try{
     	        //parse the value the user entered
 	    		altruism_boarded = parseInt(altruism);
-	    		
+
 	    		//check if the value is in an appropriate range
 	    		if(altruism_boarded < 0 || altruism_boarded > behaviour_boarded - behaviouralinaction_boarded + fearflight_boarded + panic_boarded){ 
-	    		                                    
+
 		    		if(warning == false){
-		    		
+
 		    			warning_bad_number();
 		    			warning = true;
-		    		
+
 		    		}
 	    		}
     		}
@@ -204,7 +204,7 @@ function altruism_determinator(){
     		    
 	    			warning_bad_number();
 	    			warning = true;
-	    		
+
 	    		}
     			
 			}
@@ -234,7 +234,7 @@ function behaviouralinaction_determinator(){
 
   	style.normal.textColor = Color.yellow;
 	GUILayout.BeginHorizontal(); 
-		
+
     if(labels==false) {
     
     	//the text field for the user to enter a number
@@ -247,23 +247,23 @@ function behaviouralinaction_determinator(){
 	    		behaviouralinaction_boarded = parseInt(behaviouralinaction);
 	    		//check if the value is in an appropriate range
 	    		if(behaviouralinaction_boarded < 0 || behaviouralinaction_boarded > behaviour_boarded - altruism_boarded + fearflight_boarded + panic_boarded){
-	    		                                    
+
 	    			if(warning == false){
-	    			
+
 		    			warning_bad_number();
 		    			warning = true;
-		    			
+
 	    			}
 	    		}
 	    	}
 	    	//there were non-digits in the value
 	    	catch(err){
-	    	
+
 	    	    if(warning == false){
-	    	    
+
 	    			warning_bad_number();
 	    			warning = true;
-	    			
+
 	    		}
 			}
     	}
@@ -306,22 +306,22 @@ function fearflight_determinator(){
 	    		fearflight_boarded=parseInt(fearflight);
 	    		//check if the value is in an appropriate range
 	    		if(fearflight_boarded < 0 || fearflight_boarded > behaviour_boarded - altruism_boarded + behaviouralinaction_boarded + panic_boarded){
-	    		                                           
+
 	    			if(warning == false){
-	    			
+
 		    			warning_bad_number();
 		    			warning = true;
-		    			
+
 	    			}
 	    		}
 	    	}
 	    	//there were non-digits in the value
 	        catch(err){
 	            if(warning == false){
-	            
+
 	    			warning_bad_number();
 	    			warning = true;
-	    			
+
 	    		}
 			}
     	}
@@ -364,23 +364,23 @@ function panic_determinator(){
 	    		panic_boarded=parseInt(panic);
 	    		//check if the value is in an appropriate range
 	    		if(panic_boarded < 0 || panic_boarded > behaviour_boarded - altruism_boarded + behaviouralinaction_boarded + fearflight_boarded){     
-	    		                                           
+
 	    			if(warning == false){
-	    			
+
 		    			warning_bad_number();
 		    			warning = true;
-		    			
+
 	    			}
 	    		}
 	    	}
 	    	//there were non-digits in the value
 	        catch(err){
-	        
+
 	            if(warning == false){
-	            
+
 	    			warning_bad_number();
 	    			warning = true;
-	    			
+
 	    		}
 			}
     	}
@@ -420,7 +420,7 @@ function generate_random_passenger() : int {
 }
 
 function Start(){
-
+Time.timeScale = 1;
 populate_inactive_passengers_array();
 
 }
@@ -430,14 +430,14 @@ populate_inactive_passengers_array();
 function OnGUI(){
 	//customise the look
 	GUI.skin = guiSkin;
-	
+
 	//do not show a warning message at the beginning 
 	warning = false;
-	
+
 	//GUI area
     GUILayout.BeginArea (Rect (10,0,Screen.width-10, Screen.height));        
     GUILayout.BeginVertical();
-	
+
 	//enabling the user to choose the numbers of different passengers 
 
 	altruism_determinator();
@@ -454,16 +454,16 @@ function OnGUI(){
 			passenger.active = false;
 		}
 	}
-		
+
 	var startButton = GUILayout.Button(startButtonText,GUILayout.Height(buttonHeight),GUILayout.Width(buttonWidth));
-   
+
     //start the animation
     if (startButton && start == false && warning == false){
 
 		timer.start_timer();
 		var passengers_created : int  = 0;
 		var openDoor = GameObject.FindGameObjectWithTag("plane").GetComponent("openDoors").onStart();
-			
+
 		start=true;
 		labels=true;
 		var passenger: GameObject;
@@ -472,10 +472,10 @@ function OnGUI(){
 		var panic_count : int = 0;
 		var behav_count : int = 0;
 		var fear_count : int  = 0;
-		
+
 		//default simulation is run with full plane capacity and random behaviours assigned
 		if (altruism_boarded == 0 && panic_boarded == 0 && behaviouralinaction_boarded == 0 && fearflight_boarded == 0 ) {
-
+			Debug.Log("in if");
 			for (var pass : GameObject in passengers_active) {
 
  				pass.active = true;
@@ -487,53 +487,54 @@ function OnGUI(){
  		
  		//custom simulation is run with total passengers and numbers of people with a specific behaviour chosen by the user	
  		else{
+ 		Debug.Log("in else");
 			//activate the required number of passengers having the required behaviour
 			while (passengers_created < behaviour_boarded && passengers_created < plane_capacity){
-				
+
 				//choose a random passenger to activate
 				var random_passenger = generate_random_passenger();
 				passenger = passengers_active[random_passenger];
-				
-				
+
+
 				//determine the passenger's behaviour
 				if (altr_count < altruism_boarded) {
-				
+
 					passenger.active = true;
 					passenger.GetComponent("closestDoor").calculateDoor();
 					passenger.GetComponent("Attribute").SetTypeManual("altruism");
 					passenger.GetComponent("Attribute").StartBehManual();
 					altr_count++;
 
-					
+
 				}
 				else if (panic_count < panic_boarded) {
-				
+
 					passenger.active = true;	
 					passenger.GetComponent("closestDoor").calculateDoor();
 					passenger.GetComponent("Attribute").SetTypeManual("panic");
 					passenger.GetComponent("Attribute").StartBehManual();
 					panic_count++;
-					
+
 				}
 				else if (behav_count < behaviouralinaction_boarded) {
-				
+
 					passenger.active = true;	
 					passenger.GetComponent("closestDoor").calculateDoor();
 					passenger.GetComponent("Attribute").SetTypeManual("behaviouralinaction");
 					passenger.GetComponent("Attribute").StartBehManual();
 					behav_count++;
-					
+
 				}
 				else if (fear_count < fearflight_boarded) {
-				
+
 					passenger.active = true;
 					passenger.GetComponent("closestDoor").calculateDoor();
 					passenger.GetComponent("Attribute").SetTypeManual("fearflight");
 					passenger.GetComponent("Attribute").StartBehManual();
 					fear_count++;
-					
+
 				}
-				
+
 				passengers_created++;
 
 			}
@@ -542,9 +543,11 @@ function OnGUI(){
 		startButtonText="Restart";
 	}
 	else if (startButton && start == true){
+		Debug.Log("here");
+		
         Application.LoadLevel("A320Scene");
     }
-		  
+
     //button for pausing the animation
 	if (GUILayout.Button("Pause",GUILayout.Height(buttonHeight),GUILayout.Width(buttonWidth))){
     
@@ -564,14 +567,15 @@ function OnGUI(){
     
     //check if the evacuation in finished to report to the user  
     if (start == true && (evacuated == behaviour_boarded || timer.timer == 90)){
-    
+    	Time.timeScale = 0;
+    	//pause();
 		evacuation_done();
-		
+
 	}		
 	if(allDoorsDisabled){
-	
+
 		warning_doors();
-		
+
 	}
     	
 }	
@@ -586,7 +590,7 @@ public function updateEvac(){
 
 //GUI for the results box
 function initialise_results_box(){
-	
+
 	GUILayout.BeginArea (Rect (Screen.width - resultBoxWidth, 0, resultBoxWidth, Screen.height));
 	GUILayout.BeginVertical();
 	GUILayout.BeginHorizontal();
@@ -620,14 +624,14 @@ function initialise_results_box(){
 	GUILayout.Label(rear_right_count.ToString(),GUILayout.Width(counterLabelWidth));
 	GUILayout.EndHorizontal();
 
-	
+
 	if (GUILayout.Button("Log results",GUILayout.Width(buttonWidth),GUILayout.Height(buttonHeight))){
-		
+
 		log_results();
 		logText = "Results logged at "+timer.timer +" seconds. They are stored in "+evacuation_results_filename + " and " + evacuation_doors_filename;
-	
+
 	}
-	
+
 	GUILayout.Label(logText);
 	GUILayout.EndVertical();
 	GUILayout.EndArea();
@@ -676,9 +680,7 @@ function warning_doors(){
 //reports to the user that the evacuation is finished
 function evacuation_done(){
 
-	//stop the timer
-    Time.timeScale = 0;
-    //show a message
+       //show a message
     GUI.Box (Rect (Screen.width/2 - 75, Screen.height/2-50, 145, 155),"Finish!"); 
     GUILayout.BeginArea (Rect (Screen.width/2 - 75, Screen.height/2-30, 145, 150));
     GUILayout.BeginVertical();
@@ -688,7 +690,10 @@ function evacuation_done(){
     
     	log_results();
         Application.LoadLevel("A320Scene");
-    
+   
+   
+
+
     }
   
     GUILayout.EndVertical();
@@ -701,17 +706,17 @@ function evacuation_done(){
 function pause(){
 
 	if (isPaused == true){
-	
+
 		Time.timeScale = 1;
 		isPaused = false;
-		
+
 	}
-	
+
 	else{
-	
+
 		Time.timeScale = 0;
 		isPaused = true;
-		
+
 	}
 }
 
@@ -719,11 +724,11 @@ function pause(){
 function populate_inactive_passengers_array(){
 
 	for(var i=0;i<passengers_active.Length;i++){
-	
+
 		inactive_passengers[i] = i;
-		
+
 	}
-	
+
 }
 
 
@@ -736,54 +741,54 @@ public function updateEvacFL(){
 
 	front_left_count++;
 	updateEvac();
-	
+
 }
 
 public function updateEvacFR(){
 
 	front_right_count++;
 	updateEvac();
-	
+
 }
 
 public function updateEvacBR(){
 
 	rear_right_count++;
 	updateEvac();
-	
+
 }
 
 public function updateEvacBL(){
 
 	rear_left_count++;
 	updateEvac();
-	
+
 }
 
 public function updateEvacML1(){
 
 	first_middle_left_count++;
 	updateEvac();
-	
+
 }
 
 public function updateEvacML2(){
 
 	second_middle_left_count++;
 	updateEvac();
-	
+
 }
 
 public function updateEvacMR1(){
 
 	first_middle_right_count++;
 	updateEvac();
-	
+
 }
 
 public function updateEvacMR2(){
 
 	second_middle_right_count++;
 	updateEvac();
-	
+
 }
