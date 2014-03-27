@@ -1,0 +1,9 @@
+front left door, front right door, first middle left door, first middle right door, second middle left door, second middle right door, rear left door, rear right door
+14,15, 11, 38, 11, 43, 15, 31
+15,15, 12, 31, 21, 38, 11, 35
+0,0, 0, 1, 0, 0, 0, 0
+0,0, 0, 0, 0, 1, 0, 0
+0,0, 0, 0, 0, 0, 0, 1
+15,14, 13, 33, 13, 44, 8, 37
+15,15, 9, 36, 18, 39, 9, 37
+43,6, 11, 21, 19, 31, 22, 25

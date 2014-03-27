@@ -57,12 +57,14 @@
      <Compile Include="Assets\Standard Assets\Scripts\Camera Scripts\SmoothLookAt.js" />
      <Compile Include="Assets\Standard Assets\Scripts\General Scripts\DragRigidbody.js" />
      <Compile Include="Assets\Standard Assets\timer.js" />
+     <None Include="Assets\evacuation_results.txt" />
      <None Include="Assets\RAIN\releasenotes.txt" />
      <None Include="Assets\AI\Resources\BehaviorTrees\Behaviour.xml" />
      <None Include="Assets\iTween\ReadMe!\ReadMe!.txt" />
      <None Include="Assets\AI\Resources\BehaviorTrees\test.xml" />
      <None Include="Assets\RAIN\Editor\ScriptTemplates\BehaviorTreeTemplate.xml" />
      <None Include="Assets\AI\Resources\BehaviorTrees\AllMove.xml" />
+     <None Include="Assets\evacuation_doors_results.txt" />
  <Reference Include="RAINIndie">
  <HintPath>Assets\RAIN\RAINIndie.dll</HintPath>
  </Reference>

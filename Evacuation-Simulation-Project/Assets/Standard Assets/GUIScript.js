@@ -542,8 +542,7 @@ function OnGUI(){
 		startButtonText="Restart";
 	}
 	else if (startButton && start == true){
-	
-        Application.LoadLevel(Application.loadedLevel);
+        Application.LoadLevel("A320Scene");
     }
 		  
     //button for pausing the animation
@@ -688,7 +687,7 @@ function evacuation_done(){
     if(GUILayout.Button("OK")){
     
     	log_results();
-        Application.LoadLevel(Application.loadedLevel);
+        Application.LoadLevel("A320Scene");
     
     }
   
@@ -719,7 +718,7 @@ function pause(){
 //populates the array of inactive passenger indexes
 function populate_inactive_passengers_array(){
 
-	for(var i=0;i<plane_capacity;i++){
+	for(var i=0;i<passengers_active.Length;i++){
 	
 		inactive_passengers[i] = i;
 		

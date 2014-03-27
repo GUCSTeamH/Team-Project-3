@@ -1,5 +1,7 @@
 ﻿//action script used in the behaviour tree for the people with anxiety behaviour
 
+
+//script makes use of the RAIN{Indie} plugin for Unity3D, found at : http://rivaltheory.com/rain/
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;

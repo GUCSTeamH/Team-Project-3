@@ -151,6 +151,7 @@ public class Attribute : MonoBehaviour {
 		}
 	}
 
+	//method used for assigning behaviours in custom simulations
 	void StartBehManual () {
 		RAINAgent ai = GetComponent<RAINAgent>();
 
@@ -168,8 +169,8 @@ public class Attribute : MonoBehaviour {
 		}
 	}
 
+	//method used for assigning a behaviour type in custom simulations
 	void SetTypeManual(string type){
-		Debug.Log(type);
 		this.type = type;
 	}
 }
