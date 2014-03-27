@@ -12,13 +12,18 @@ var currentCamera: Camera;
 var movingCamPos : Vector3;
 
  
-//set the current camera to the moving camera for more flexibility at the start
+//set the current camera to the moving camera for more flexibility at the start, disable all the rest
 function Start()
 
 {
 
   currentCamera = movingCamera;
   currentCamera.enabled = true;
+  frontCamera.enabled = false;
+  backCamera.enabled = false;
+  topCamera.enabled = false;
+  leftCamera.enabled = false;
+  rightCamera.enabled = false;
   movingCamPos = transform.position;
   
 }
@@ -116,6 +121,3 @@ function Update () {
 	if (Input.GetKey(KeyCode.RightArrow)) currentCamera.transform.Translate(Vector3.right * Time.deltaTime * 10);
 
 }
-
-
-
